@@ -4,10 +4,11 @@ with Ada.Text_IO;
 package body GL.Shaders.Programs.Files is
 
 
-   procedure Attach (Item : Program; Kind : Shader_Type; Source : File_Name) is
+   procedure Attach_Source (Item : Program; Kind : Shader_Type; Source : File_Name) is
       Accessory : Shader_Name;
    begin
-      Accessory := Create (Kind, Source);
+      Accessory := Create_Empty (Kind);
+      Set_Source (Accessory, Source);
       Attach (Item, Accessory);
    end;
 

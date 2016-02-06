@@ -23,11 +23,6 @@ package GL.Shaders is
    function Create_Empty (Kind : Shader_Type) return Shader_Name with
      Post => Validate (Create_Empty'Result);
 
-   function Create (Kind : Shader_Type; Source : Shading_Language) return Shader_Name
-     with
-       Post => Validate (Create'Result) and Compile_Succeess (Create'Result);
-
-
    procedure Delete (Item : Shader_Name);
 
    -- ShaderSource sets the source code in shader.
@@ -38,7 +33,7 @@ package GL.Shaders is
      Post => Get_Source_Length (Item) = Source'Length + 1; -- + 1 includes null terminator.
 
    procedure Compile_Unchecked (Item : Shader_Name);
-   procedure Compile (Item : Shader_Name) with Post => Compile_Succeess (Item);
+
 
    function Get_Source_Length (Item : Shader_Name) return Natural;
    function Validate (Item : Shader_Name) return Boolean;

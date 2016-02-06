@@ -6,6 +6,6 @@ package GL.Shaders.Files is
 
    type File_Name is new String;
 
-   function Create (Kind : Shader_Type; Source : File_Name) return Shader_Name;
+   procedure Set_Source (Name : Shader_Name; Source : File_Name);
 
 end;
