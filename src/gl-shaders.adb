@@ -30,26 +30,6 @@ package body GL.Shaders is
       null;
    end;
 
-   procedure Compile_Unchecked (Item : Shader_Name) is
-   begin
-      glCompileShader (GLuint (Item));
-   end;
-
-   procedure Compile (Item : Shader_Name) is
-   begin
-      Compile_Unchecked (Item);
-   end;
-
-   function Create (Kind : Shader_Type; Source : Shading_Language) return Shader_Name is
-      Item : Shader_Name;
-   begin
-      Item := Create_Empty (Kind);
-      Set_Source (Item, Source);
-      Compile (Item);
-      return Item;
-   end;
-
-
 
 
 
@@ -121,5 +101,48 @@ package body GL.Shaders is
       glShaderSource (GLuint (Item), 1, C_Content_Array, C_Length_Array);
    end;
 
+
+   procedure Compile_Unchecked (Item : Shader_Name) is
+   begin
+      glCompileShader (GLuint (Item));
+   end;
+
+   procedure Compile_Checked (Item : Shader_Name) is
+   begin
+      glCompileShader (GLuint (Item));
+      if not Compile_Succeess (Item) then
+         raise Compile_Error with String (Get_Compile_Log (Item));
+      end if;
+   end;
+
+
+   procedure Compile_Unchecked_Source (Item : Shader_Name; Source : Shading_Language) is
+   begin
+      Set_Source (Item, Source);
+      Compile_Unchecked_Source (Item, Source);
+   end;
+
+   procedure Compile_Checked_Source (Item : Shader_Name; Source : Shading_Language) is
+   begin
+      Set_Source (Item, Source);
+      Compile_Checked_Source (Item, Source);
+   end;
+
+
+   function Create_Checked (Kind : Shader_Type; Source : Shading_Language) return Shader_Name is
+      S : Shader_Name;
+   begin
+      S := Create_Empty (Kind);
+      Compile_Checked_Source (S, Source);
+      return S;
+   end;
+
+   function Create_Unchecked (Kind : Shader_Type; Source : Shading_Language) return Shader_Name is
+      S : Shader_Name;
+   begin
+      S := Create_Empty (Kind);
+      Compile_Unchecked_Source (S, Source);
+      return S;
+   end;
 
 end;

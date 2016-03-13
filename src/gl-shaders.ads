@@ -19,10 +19,12 @@ package GL.Shaders is
    type Tess_Evaluation_Shading_Language is new Shading_Language;
    type Tess_Control_Shading_Language is new Shading_Language;
 
+   Compile_Error : exception;
 
    function Create_Empty (Kind : Shader_Type) return Shader_Name with
      Post => Validate (Create_Empty'Result);
-
+   function Create_Checked (Kind : Shader_Type; Source : Shading_Language) return Shader_Name;
+   function Create_Unchecked (Kind : Shader_Type; Source : Shading_Language) return Shader_Name;
    procedure Delete (Item : Shader_Name);
 
    -- ShaderSource sets the source code in shader.
@@ -32,8 +34,10 @@ package GL.Shaders is
    procedure Set_Source (Item : Shader_Name; Source : Shading_Language) with
      Post => Get_Source_Length (Item) = Source'Length + 1; -- + 1 includes null terminator.
 
+   procedure Compile_Unchecked_Source (Item : Shader_Name; Source : Shading_Language);
+   procedure Compile_Checked_Source (Item : Shader_Name; Source : Shading_Language);
    procedure Compile_Unchecked (Item : Shader_Name);
-
+   procedure Compile_Checked (Item : Shader_Name);
 
    function Get_Source_Length (Item : Shader_Name) return Natural;
    function Validate (Item : Shader_Name) return Boolean;
