@@ -5,16 +5,21 @@ with Interfaces;
 with Interfaces.C;
 with Interfaces.C.Strings;
 
-package body GL.Programs.Shaders is
+package body GL.Shaders is
 
-   function Create_Empty (Kind : Shader_Type) return Shader is
+   function Identity (Item : Shader) return GLuint is
+   begin
+      return GLuint (Item);
+   end;
+
+   function Create_Empty (Kind : Shader_Stage) return Shader is
       S : Shader;
    begin
       S := Shader (glCreateShader (Kind'Enum_Rep));
       return S;
    end;
 
-   function Validate (Item : Shader) return Boolean is
+   function Is_Shader (Item : Shader) return Boolean is
       use type GLboolean;
       B : GLboolean;
    begin
@@ -47,12 +52,12 @@ package body GL.Programs.Shaders is
       return R = GL_TRUE;
    end;
 
-   function Get_Type (Item : Shader) return Shader_Type is
+   function Get_Stage (Item : Shader) return Shader_Stage is
       use type GLint;
       Result : aliased GLint;
    begin
       Get_Info (Item, Type_Info, Result'Access);
-      return Shader_Type'Enum_Val (Result);
+      return Shader_Stage'Enum_Val (Result);
    end;
 
    function Get_Source_Length (Item : Shader) return Natural is
@@ -65,7 +70,7 @@ package body GL.Programs.Shaders is
    end;
 
 
-   procedure Get_Compile_Log (Item : Shader; Message : out Compile_Log; Count : out Natural) is
+   procedure Get_Compile_Log (Item : Shader; Message : out String; Count : out Natural) is
       use Interfaces.C;
       Length : aliased GLsizei := 0;
       Text : aliased GLstring (1 .. Message'Length);
@@ -74,18 +79,15 @@ package body GL.Programs.Shaders is
       To_Ada (Text, String (Message), Count);
    end;
 
-   function Get_Compile_Log (Item : Shader; Count : Natural := 512) return Compile_Log is
-      Text : Compile_Log (1 .. Count);
+   function Get_Compile_Log (Item : Shader; Count : Natural := 1024) return String is
+      Text : String (1 .. Count);
       Length : Natural := 0;
    begin
       Get_Compile_Log (Item, Text, Length);
       return Text (1 .. Length);
    end;
 
-
-
-
-   procedure Set_Source (Item : Shader; Source : Shading_Language) is
+   procedure Set_Source (Item : Shader; Source : String) is
       use Interfaces.C;
       use Interfaces.C.Strings;
       C_Content : aliased char_array := To_C (String (Source));
@@ -103,11 +105,6 @@ package body GL.Programs.Shaders is
    procedure Compile (Item : Shader) is
    begin
       glCompileShader (GLuint (Item));
-   end;
-
-   procedure Attach (Item : Program; S : Shader) is
-   begin
-      glAttachShader (GLuint (Item), GLuint (S));
    end;
 
 end;

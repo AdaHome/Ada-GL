@@ -1,0 +1,124 @@
+with Ada.Text_IO;
+with Ada.Streams.Stream_IO;
+with Ada.Directories;
+with Ada.Integer_Text_IO;
+
+package body GL.Programs_Overhaul is
+
+   subtype Shader_Type is GL.Shaders.Shader_Type;
+   subtype Shader_File_Size is Ada.Directories.File_Size;
+   subtype Shading_Language is GL.Shaders.Shading_Language;
+   type Fragment_Shading_Language is new Shading_Language;
+   type Geometry_Shading_Language is new Shading_Language;
+   type Tess_Evaluation_Shading_Language is new Shading_Language;
+   type Tess_Control_Shading_Language is new Shading_Language;
+
+   function Size (Name : Shader_File_Name) return Shader_File_Size is
+   begin
+      return Ada.Directories.Size (String (Name));
+   end;
+
+   procedure Read (Name : Shader_File_Name; Content : out Shading_Language) is
+      use Ada.Streams.Stream_IO;
+      File : File_Type;
+      Stream0 : Stream_Access;
+   begin
+      Open  (File, In_File, String (Name));
+      Stream0 := Stream (File);
+      Shading_Language'Read (Stream0, Content);
+      Close (File);
+   end;
+
+   function Create_Empty return Program is
+      use GL.Programs;
+      Item : Program := GL.Programs.Create_Empty;
+   begin
+      if not Validate (Item) then
+         raise Create_Empty_Program_Object_Error with "Creating empty program object failed.";
+      end if;
+      return Item;
+   end;
+
+   function Get_Shader_Type (Name : Shader_File_Name) return Shader_Type is
+      use GL.Shaders;
+      use type Shader_File_Name;
+      Sub_Size : constant Positive := 4;
+      subtype Sub is Integer range Name'Last - Sub_Size + 1 .. Name'Last;
+   begin
+      if Name'Length < Sub_Size then
+         raise Unknown_Shader_File_Extension_Error with "Unknown shader file name extension";
+      end if;
+      if Name (Sub) = "glfs" then
+         return Fragment_Type;
+      elsif Name (Sub) = "glvs" then
+         return Vertex_Type;
+      else
+         raise Unknown_Shader_File_Extension_Error with "Unknown shader file name extension";
+      end if;
+   end;
+
+   procedure Attach (Item : Program; Name : Shader_File_Name) is
+      use GL.Shaders;
+      use GL.Programs;
+      use type Shader_File_Size;
+      subtype Shader_Type is GL.Shaders.Shader_Type;
+      Source_Type   : constant Shader_Type := Get_Shader_Type (Name);
+      Source_Shader : constant Shader := Create_Empty (Source_Type);
+      Source_Size   : constant Shader_File_Size := Size (Name);
+      Source_Buffer : Shading_Language (1 .. Integer (Source_Size));
+   begin
+
+      if not Validate (Source_Shader) then
+         raise Create_Empty_Shader_Object_Error with "Creating empty shader failed.";
+      end if;
+
+      if Source_Size <= 0 then
+         raise Empty_File_Error with "File is empty.";
+      end if;
+
+      Read (Name, Source_Buffer);
+      Set_Source (Source_Shader, Source_Buffer);
+      if Get_Source_Length (Source_Shader) /= Source_Buffer'Length + 1 then
+         -- + 1 includes null terminator.
+         raise Source_Length_Error with "Source length is not right.";
+      end if;
+
+      Compile (Source_Shader);
+      if not Compile_Succeess (Source_Shader) then
+         raise Compile_Error with
+           "Compiling: " & Source_Type'Img & " " & String (Name) & " " & String (Get_Compile_Log (Source_Shader));
+      end if;
+
+      Attach (Item, GL.Shaders.Identity (Source_Shader));
+   end;
+
+   procedure Link (Item : Program) is
+   begin
+      GL.Programs.Link (Item);
+      -- Validate?
+   end;
+
+   procedure Set_Current (Item : Program) is
+   begin
+      GL.Programs.Set_Current (Item);
+   end;
+
+   function Get (Item : Program; Name : Uniform_Name) return Location is
+      use GL.Programs;
+   begin
+      return GL.Uniforms.Get (Identity (Item), Name);
+   end;
+
+   procedure Modify (L : Location; M : Matrix_4) is
+   begin
+      GL.Uniforms.Modify (L, M'Address);
+   end;
+
+   procedure Put (L : Location) is
+      use GL.Uniforms;
+      use Ada.Integer_Text_IO;
+   begin
+      Put (Integer (Identity (L)), 3);
+   end;
+
+end;
