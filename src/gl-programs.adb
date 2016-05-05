@@ -22,6 +22,14 @@ package body GL.Programs is
       glLinkProgram (GLuint (Item));
    end;
 
+   procedure Link_Checked (Item : Program) is
+   begin
+      Link (Item);
+      if not Link_Succeess (Item) then
+         raise Link_Error;
+      end if;
+   end;
+
    procedure Set_Current (Item : Program) is
       use GL.C;
    begin
@@ -42,14 +50,14 @@ package body GL.Programs is
       return GLuint (Item);
    end;
 
-   procedure Attach (Item : Program; S : GLuint) is
+   procedure Attach (To : Program; Attachment : GLuint) is
    begin
-      glAttachShader (GLuint (Item), S);
+      glAttachShader (GLuint (To), Attachment);
    end;
 
-   procedure Get_Info (Item : Program; P : Program_Info; R : access GLint) is
+   procedure Get_Info (From : Program; Kind : Program_Info; Result : access GLint) is
    begin
-      glGetProgramiv (GLuint (Item), P'Enum_Rep, R);
+      glGetProgramiv (GLuint (From), Kind'Enum_Rep, Result);
    end;
 
    function Link_Succeess (Item : Program) return Boolean is
@@ -60,7 +68,7 @@ package body GL.Programs is
       return R = GL_TRUE;
    end;
 
-   procedure Get_Compile_Log (Item : Program; Message : out String; Count : out Natural) is
+   procedure Get_Link_Log (Item : Program; Message : out String; Count : out Natural) is
       use Interfaces.C;
       Length : aliased GLsizei := 0;
       Text : aliased GLstring (1 .. Message'Length);
@@ -69,11 +77,11 @@ package body GL.Programs is
       To_Ada (Text, String (Message), Count);
    end;
 
-   function Get_Compile_Log (Item : Program; Count : Natural := 1024) return String is
+   function Get_Link_Log (Item : Program; Count : Natural := 1024) return String is
       Text : String (1 .. Count);
       Length : Natural := 0;
    begin
-      Get_Compile_Log (Item, Text, Length);
+      Get_Link_Log (Item, Text, Length);
       return Text (1 .. Length);
    end;
 

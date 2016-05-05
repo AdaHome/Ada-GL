@@ -14,11 +14,14 @@ package GL.Programs is
    function Validate (Item : Program) return Boolean;
    function Create_Empty return Program;
    procedure Link (Item : Program);
+   procedure Link_Checked (Item : Program);
    procedure Set_Current (Item : Program);
-   procedure Attach (Item : Program; S : GLuint);
-   procedure Get_Compile_Log (Item : Program; Message : out String; Count : out Natural);
-   function Get_Compile_Log (Item : Program; Count : Natural := 1024) return String;
+   procedure Attach (To : Program; Attachment : GLuint);
+   procedure Get_Link_Log (Item : Program; Message : out String; Count : out Natural);
+   function Get_Link_Log (Item : Program; Count : Natural := 1024) return String;
    function Link_Succeess (Item : Program) return Boolean;
+
+   Link_Error : exception;
 
 private
 

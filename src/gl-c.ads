@@ -28,4 +28,7 @@ package GL.C is
    subtype GLstring     is char_array;
    subtype GLstringv    is chars_ptr_array;
 
+   type GLchar_ptr is access GLchar;
+   type GLchar_ptr_ptr is access GLchar_ptr;
+
 end;

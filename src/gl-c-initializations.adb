@@ -65,6 +65,7 @@ package body GL.C.Initializations is
       glIsBuffer                := Convert (Load ("glIsBuffer"));
       glIsVertexArray           := Convert (Load ("glIsVertexArray"));
       glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
+      glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
    end;
 
 end;

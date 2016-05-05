@@ -16,13 +16,18 @@ package GL.C.Complete is
    GL_INFO_LOG_LENGTH      : constant := 16#8B84#;
    GL_SHADER_SOURCE_LENGTH : constant := 16#8B88#;
 
-
+   GL_BYTE                 : constant := 16#1400#;
+   GL_UNSIGNED_BYTE        : constant := 16#1401#;
+   GL_SHORT                : constant := 16#1402#;
+   GL_UNSIGNED_SHORT       : constant := 16#1403#;
+   GL_FLOAT                : constant := 16#1406#;
+   GL_FIXED                : constant := 16#140C#;
 
    GL_LINK_STATUS          : constant := 16#8B82#;
    GL_ARRAY_BUFFER         : constant := 16#8892#;
    GL_ELEMENT_ARRAY_BUFFER : constant := 16#8893#;
    GL_STATIC_DRAW          : constant := 16#88E4#;
-   GL_FLOAT                : constant := 16#1406#;
+   GL_DYNAMIC_DRAW         : constant := 16#88E5#; --FIx
    GL_TRIANGLES            : constant := 16#0004#;
    GL_ACTIVE_ATTRIBUTES    : constant := 16#8B89#;
    GL_MAJOR_VERSION        : constant := 16#821B#;

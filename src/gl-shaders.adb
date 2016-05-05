@@ -56,7 +56,7 @@ package body GL.Shaders is
       use type GLint;
       Result : aliased GLint;
    begin
-      Get_Info (Item, Type_Info, Result'Access);
+      Get_Info (Item, Stage_Info, Result'Access);
       return Shader_Stage'Enum_Val (Result);
    end;
 
@@ -75,7 +75,7 @@ package body GL.Shaders is
       Length : aliased GLsizei := 0;
       Text : aliased GLstring (1 .. Message'Length);
    begin
-      glGetShaderInfoLog (GLuint (Item), Message'Length, Length'Access, Text'Address);
+      glGetShaderInfoLog (GLuint (Item), Message'Length, Length, Text'Address);
       To_Ada (Text, String (Message), Count);
    end;
 
@@ -106,5 +106,16 @@ package body GL.Shaders is
    begin
       glCompileShader (GLuint (Item));
    end;
+
+
+   procedure Compile_Checked (Item : Shader) is
+   begin
+      Compile (Item);
+      if not Compile_Succeess (Item) then
+         raise Compile_Error;
+      end if;
+   end;
+
+
 
 end;

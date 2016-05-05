@@ -1,27 +1,35 @@
 with GL.C.Complete;
 with Interfaces.C;
+with Ada.Text_IO;
 
 
 package body GL.Uniforms is
 
-   function Identity (L : Location) return GLint is
+   function Identity (Item : Location) return GLint is
    begin
-      return GLint (L);
+      return GLint (Item);
    end;
 
-   procedure Modify (L : Location; M : Address) is
+   procedure Modify (Item : Location; Data : Address) is
       use GL.C.Complete;
       use GL.C;
    begin
-      glUniformMatrix4fv (GLint (L), 1, GL_FALSE, M);
+      glUniformMatrix4fv (GLint (Item), 1, GL_FALSE, Data);
    end;
 
-   function Get (P : GLuint; Name : String) return Location is
-      use GL.C;
+   function Get (From : GLuint; Name : String) return Location is
       use GL.C.Complete;
       use Interfaces.C;
    begin
-      return Location (glGetUniformLocation (P, To_C (Name)));
+      return Location (glGetUniformLocation (From, To_C (Name)));
+   end;
+
+
+
+   procedure Put_Line_Fancy (Item : Location) is
+      use Ada.Text_IO;
+   begin
+      Put_Line ("Uniform location: " & Item'Img);
    end;
 
 end;

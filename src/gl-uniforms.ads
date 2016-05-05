@@ -10,9 +10,10 @@ package GL.Uniforms is
    type Location is private;
    type Uniform_Name is new String;
 
-   procedure Modify (L : Location; M : Address);
-   function Get (P : GLuint; Name : String) return Location;
-   function Identity (L : Location) return GLint;
+   procedure Modify (Item : Location; Data : Address);
+   function Get (From : GLuint; Name : String) return Location;
+   function Identity (Item : Location) return GLint;
+   procedure Put_Line_Fancy (Item : Location);
 
 private
 
