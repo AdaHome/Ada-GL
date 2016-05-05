@@ -29,5 +29,6 @@ package GL.C.Accessories is
    type glVertexArrayAttribFormat is access procedure (vaobj : GLuint; attribindex : GLuint; size : GLint; t : GLenum; normalized : GLboolean; relativeoffset : GLuint) with Convention => StdCall;
    type glBufferSubData           is access procedure (target : GLenum; offset : GLintptr; size : GLsizeiptr; data : Address) with Convention => StdCall;
    type glGetActiveAttrib         is access procedure (program : GLuint; index : GLuint; bufSize : GLsizei; length : out GLsizei; size : out GLint; kind : out GLenum; name : Address);
-
+   type glDrawArrays              is access procedure (mode : GLenum; first : GLint; count : GLsizei) with Convention => StdCall;
+   type glClear                   is access procedure (mask : GLbitfield) with Convention => StdCall;
 end;

@@ -34,7 +34,8 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glGetAttribLocation);
    function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayAttribFormat);
    function Convert is new Unchecked_Conversion (Address, Accessories.glBufferSubData);
-
+   function Convert is new Unchecked_Conversion (Address, Accessories.glDrawArrays);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glClear);
 
    procedure Initialize (Load : Loader) is
       use GL.C.Complete;
@@ -64,7 +65,6 @@ package body GL.C.Initializations is
       glIsProgram               := Convert (Load ("glIsProgram"));
       glIsBuffer                := Convert (Load ("glIsBuffer"));
       glIsVertexArray           := Convert (Load ("glIsVertexArray"));
-      glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
       glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
    end;
 

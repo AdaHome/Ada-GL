@@ -7,6 +7,8 @@ package GL.Vertex_Attributes is
    use GL.C;
    use GL.C.Complete;
 
+   type Config is private;
+   type Config_Array is array (Integer range <>) of Config;
    type Location is private;
    type Component_Type is (Byte_Type, Unsigned_Byte_Type, Short_Type, Unsigned_Short_Type, Float_Type, Fixed_Type);
 
@@ -23,8 +25,12 @@ package GL.Vertex_Attributes is
 
    procedure Put_Line_Fancy (Item : Location);
 
+   function Generate return Config;
+   procedure Bind (Item : Config);
+
 private
 
+   type Config is new GLuint;
    type Location is new GLuint range 0 .. GLuint'Last;
 
    for Component_Type'Size use GLenum'Size;

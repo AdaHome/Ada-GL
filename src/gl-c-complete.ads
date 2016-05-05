@@ -36,7 +36,10 @@ package GL.C.Complete is
    GL_DEPTH_TEST           : constant := 16#0B71#;
 
 
-
+   procedure glViewport (x : GLint; y : GLint; width : GLsizei; height : GLsizei) with
+     Import,
+     Convention => StdCall,
+     External_Name => "glViewport";
 
    procedure glDrawArrays (mode : GLenum; first : GLint; count : GLsizei) with
      Import,

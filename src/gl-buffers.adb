@@ -13,9 +13,9 @@ package body GL.Buffers is
       return Item (Item'First);
    end;
 
-   procedure Bind (Item : Buffer; Slot : Buffer_Slot) is
+   procedure Bind (Item : Buffer; To : Buffer_Slot) is
    begin
-      glBindBuffer (GLuint (Item), Slot'Enum_Rep);
+      glBindBuffer (GLuint (Item), To'Enum_Rep);
    end;
 
    procedure Allocate (Target : Buffer_Slot; Size : Natural; Data : System.Address; Usage : Buffer_Usage) is
@@ -31,6 +31,11 @@ package body GL.Buffers is
    procedure Redefine (Target : Buffer_Slot; Offset : Natural; Size : Natural; Data : System.Address) is
    begin
       glBufferSubData (Target'Enum_Rep, GLintptr (Offset), GLsizeiptr (Size), Data);
+   end;
+
+   procedure Clear (Item : Bitplane) is
+   begin
+      glClear (Item'Enum_Rep);
    end;
 
 

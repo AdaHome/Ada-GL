@@ -35,4 +35,24 @@ package body GL.Vertex_Attributes is
       Put_Line ("Vertex attribute location: " & Item'Img);
    end;
 
+
+   procedure Generate (Item : out Config_Array) is
+   begin
+      Item := (others => 0);
+      glGenVertexArrays (Item'Length, GLuint (Item (Item'First))'Unrestricted_Access);
+   end;
+
+   function Generate return Config is
+      Item : Config_Array (1 .. 1);
+   begin
+      Generate (Item);
+      return Item (Item'First);
+   end;
+
+   procedure Bind (Item : Config) is
+   begin
+      glBindVertexArray (GLuint (Item));
+   end;
+
+
 end;

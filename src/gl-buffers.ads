@@ -11,15 +11,17 @@ package GL.Buffers is
    type Buffer_Array is array (Integer range <>) of aliased Buffer;
    type Buffer_Slot is (Array_Slot, Element_Array_Slot);
    type Buffer_Usage is (Static_Usage, Dynamic_Usage);
+   type Bitplane is (Depth_Plane, Color_Plane);--, Accumulation_Plane, Stencil_Plane);
 
    procedure Generate (Item : out Buffer_Array);
    function Generate return Buffer;
-   procedure Bind (Item : Buffer; Slot : Buffer_Slot);
+   procedure Bind (Item : Buffer; To : Buffer_Slot);
    procedure Allocate (Target : Buffer_Slot; Size : Natural; Data : System.Address; Usage : Buffer_Usage);
    procedure Allocate (Target : Buffer_Slot; Size : Natural; Usage : Buffer_Usage);
    procedure Redefine (Target : Buffer_Slot; Offset : Natural; Size : Natural; Data : System.Address);
 
 
+   procedure Clear (Item : Bitplane);
 
 private
 
@@ -39,6 +41,13 @@ private
      (
       Static_Usage => GL_STATIC_DRAW,
       Dynamic_Usage => GL_DYNAMIC_DRAW
+     );
+
+   for Bitplane'Size use GLbitfield'Size;
+   for Bitplane use
+     (
+      Depth_Plane => GL_DEPTH_BUFFER_BIT,
+      Color_Plane => GL_COLOR_BUFFER_BIT
      );
 
 end;
