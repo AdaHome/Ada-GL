@@ -11,19 +11,23 @@ package GL.Vertex_Attributes is
    type Config_Array is array (Integer range <>) of Config;
    type Location is private;
    type Component_Type is (Byte_Type, Unsigned_Byte_Type, Short_Type, Unsigned_Short_Type, Float_Type, Fixed_Type);
+   type Byte is new Natural;
+   type Bit is new Natural;
 
    --glEnableVertexAttribArray enables the generic vertex attribute array specified by index.
    --glDisableVertexAttribArray disables the generic vertex attribute array specified by index.
    --By default, all client-side capabilities are disabled, including all generic vertex attribute arrays.
    --If enabled, the values in the generic vertex attribute array will be accessed and used for rendering when calls are made to vertex array commands such as glDrawArrays or glDrawElements.
-   procedure Enable_Vertex_Attribute_Array (Index : Location);
+   procedure Enable (Index : Location);
 
-   procedure Set_Vertex_Attribute (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Natural; Pointer : Natural);
+   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Byte; Pointer : Byte);
+   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Bit; Pointer : Bit);
 
    function Get (From : GLuint; Name : String) return Location;
-   function Create (Index : Natural) return Location;
+   function Use_Index (Index : Natural) return Location;
 
    procedure Put_Line_Fancy (Item : Location);
+   procedure Put_Line_Fancy (Item : Config);
 
    function Generate return Config;
    procedure Bind (Item : Config);
