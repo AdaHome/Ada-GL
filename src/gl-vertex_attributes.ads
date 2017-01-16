@@ -11,8 +11,6 @@ package GL.Vertex_Attributes is
    type Config_Array is array (Integer range <>) of Config;
    type Location is private;
    type Component_Type is (Byte_Type, Unsigned_Byte_Type, Short_Type, Unsigned_Short_Type, Float_Type, Fixed_Type);
-   type Byte_Unit is new Natural;
-   type Bit_Unit is new Natural;
 
    --glEnableVertexAttribArray enables the generic vertex attribute array specified by index.
    --glDisableVertexAttribArray disables the generic vertex attribute array specified by index.

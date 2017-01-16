@@ -6,7 +6,7 @@ package GL.Buffers is
 
    use GL.C;
    use GL.C.Complete;
-    use System;
+   use System;
 
    type Buffer is private;
    type Buffer_Array is array (Integer range <>) of aliased Buffer;
@@ -25,10 +25,6 @@ package GL.Buffers is
    --  GL_STENCIL_BUFFER_BIT
    --  Indicates the stencil buffer.
    type Bitplane is (Depth_Plane, Color_Plane);--, Accumulation_Plane, Stencil_Plane);
-
-
-   type Byte_Unit is new Natural;
-   type Bit_Unit is new Natural;
 
 
    procedure Generate (Item : out Buffer_Array);
