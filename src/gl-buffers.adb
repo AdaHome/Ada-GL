@@ -26,34 +26,34 @@ package body GL.Buffers is
       glBindBuffer (To'Enum_Rep, GLuint (Item));
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Byte; Data : Address; Usage : Buffer_Usage) is
+   procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage) is
    begin
       glBufferData (Target'Enum_Rep, GLsizeiptr (Size), Data, Usage'Enum_Rep);
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Byte; Usage : Buffer_Usage) is
+   procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Usage : Buffer_Usage) is
    begin
       Allocate (Target, Size, Null_Address, Usage);
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Bit; Data : Address; Usage : Buffer_Usage) is
+   procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage) is
    begin
-       Allocate (Target, Byte (Size / Storage_Unit), Data, Usage);
+       Allocate (Target, Byte_Unit (Size / Storage_Unit), Data, Usage);
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Bit; Usage : Buffer_Usage) is
+   procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Usage : Buffer_Usage) is
    begin
       Allocate (Target, Size, Null_Address, Usage);
    end;
 
-   procedure Redefine (Target : Buffer_Slot; Offset : Byte; Size : Byte; Data : System.Address) is
+   procedure Redefine (Target : Buffer_Slot; Offset : Byte_Unit; Size : Byte_Unit; Data : System.Address) is
    begin
       glBufferSubData (Target'Enum_Rep, GLintptr (Offset), GLsizeiptr (Size), Data);
    end;
 
-   procedure Redefine (Target : Buffer_Slot; Offset : Bit; Size : Bit; Data : System.Address) is
+   procedure Redefine (Target : Buffer_Slot; Offset : Bit_Unit; Size : Bit_Unit; Data : System.Address) is
    begin
-      Redefine (Target, Byte (Offset / Storage_Unit), Byte (Size / Storage_Unit), Data);
+      Redefine (Target, Byte_Unit (Offset / Storage_Unit), Byte_Unit (Size / Storage_Unit), Data);
    end;
 
    procedure Clear (Item : Bitplane) is

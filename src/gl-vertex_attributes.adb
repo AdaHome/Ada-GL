@@ -13,15 +13,15 @@ package body GL.Vertex_Attributes is
       glEnableVertexAttribArray (GLuint (Index));
    end;
 
-   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Byte; Pointer : Byte) is
+   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Byte_Unit; Pointer : Byte_Unit) is
    begin
       glVertexAttribPointer (GLuint (Index), GLint (Size), T'Enum_Rep, Normalized'Enum_Rep, GLsizei (Stride), System'To_Address (Pointer));
    end;
 
-   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Bit; Pointer : Bit) is
+   procedure Set (Index : Location; Size : Natural; T : Component_Type; Normalized : Boolean; Stride : Bit_Unit; Pointer : Bit_Unit) is
       use System;
    begin
-      Set (Index, Size, T, Normalized, Byte (Stride / Storage_Unit), Byte (Pointer / Storage_Unit));
+      Set (Index, Size, T, Normalized, Byte_Unit (Stride / Storage_Unit), Byte_Unit (Pointer / Storage_Unit));
    end;
 
    function Get (From : GLuint; Name : String) return Location is

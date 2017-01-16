@@ -29,6 +29,7 @@ package GL.C.Complete is
    GL_STATIC_DRAW          : constant := 16#88E4#;
    GL_DYNAMIC_DRAW         : constant := 16#88E5#; --FIx
    GL_TRIANGLES            : constant := 16#0004#;
+   GL_LINES                : constant := 16#0001#;
    GL_ACTIVE_ATTRIBUTES    : constant := 16#8B89#;
    GL_MAJOR_VERSION        : constant := 16#821B#;
    GL_COLOR_BUFFER_BIT     : constant := 16#00004000#;
