@@ -31,10 +31,12 @@ package GL.Buffers is
    function Generate return Buffer;
    procedure Bind (To : Buffer_Slot; Item : Buffer);
 
-   procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage);
+   procedure Allocate_Init (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage);
    procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Usage : Buffer_Usage);
-   procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage);
+
+   procedure Allocate_Init (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage);
    procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Usage : Buffer_Usage);
+
    procedure Redefine (Target : Buffer_Slot; Offset : Byte_Unit; Size : Byte_Unit; Data : Address);
    procedure Redefine (Target : Buffer_Slot; Offset : Bit_Unit; Size : Bit_Unit; Data : Address);
 

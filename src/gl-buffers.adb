@@ -26,24 +26,24 @@ package body GL.Buffers is
       glBindBuffer (To'Enum_Rep, GLuint (Item));
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage) is
+   procedure Allocate_Init (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage) is
    begin
       glBufferData (Target'Enum_Rep, GLsizeiptr (Size), Data, Usage'Enum_Rep);
    end;
 
    procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Usage : Buffer_Usage) is
    begin
-      Allocate (Target, Size, Null_Address, Usage);
+      Allocate_Init (Target, Size, Null_Address, Usage);
    end;
 
-   procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage) is
+   procedure Allocate_Init (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage) is
    begin
-       Allocate (Target, Byte_Unit (Size / Storage_Unit), Data, Usage);
+       Allocate_Init (Target, Byte_Unit (Size / Storage_Unit), Data, Usage);
    end;
 
    procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Usage : Buffer_Usage) is
    begin
-      Allocate (Target, Size, Null_Address, Usage);
+      Allocate_Init (Target, Size, Null_Address, Usage);
    end;
 
    procedure Redefine (Target : Buffer_Slot; Offset : Byte_Unit; Size : Byte_Unit; Data : System.Address) is
