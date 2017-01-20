@@ -10,7 +10,23 @@ package GL.Buffers is
 
    type Buffer is private;
    type Buffer_Array is array (Integer range <>) of aliased Buffer;
+
+   --  Array_Slot	        Vertex attributes
+   --  GL_ATOMIC_COUNTER_BUFFER	Atomic counter storage
+   --  GL_COPY_READ_BUFFER	Buffer copy source
+   --  GL_COPY_WRITE_BUFFER	Buffer copy destination
+   --  GL_DISPATCH_INDIRECT_BUFFER	Indirect compute dispatch commands
+   --  GL_DRAW_INDIRECT_BUFFER	Indirect command arguments
+   --  Element_Array_Slot	Vertex array indices
+   --  GL_PIXEL_PACK_BUFFER	Pixel read target
+   --  GL_PIXEL_UNPACK_BUFFER	Texture data source
+   --  GL_QUERY_BUFFER	Query result buffer
+   --  GL_SHADER_STORAGE_BUFFER	Read-write storage for shaders
+   --  GL_TEXTURE_BUFFER	Texture data buffer
+   --  GL_TRANSFORM_FEEDBACK_BUFFER	Transform feedback buffer
+   --  GL_UNIFORM_BUFFER	Uniform block storage
    type Buffer_Slot is (Array_Slot, Element_Array_Slot);
+
    type Buffer_Usage is (Static_Usage, Dynamic_Usage);
 
    --  Depth_Plane : GL_COLOR_BUFFER_BIT
@@ -31,11 +47,23 @@ package GL.Buffers is
    function Generate return Buffer;
    procedure Bind (To : Buffer_Slot; Item : Buffer);
 
+
+   -- Create a new data store for a buffer object.
+   -- Data that will be copied into the data store for initialization.
    procedure Allocate_Init (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage);
+
+   -- Create a new data store for a buffer object.
+   -- Data that will be copied into the data store for initialization.
+   procedure Allocate_Init (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage);
+
+   -- Create a new data store for a buffer object.
    procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Usage : Buffer_Usage);
 
-   procedure Allocate_Init (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage);
+   -- Create a new data store for a buffer object.
    procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Usage : Buffer_Usage);
+
+
+
 
    procedure Redefine (Target : Buffer_Slot; Offset : Byte_Unit; Size : Byte_Unit; Data : Address);
    procedure Redefine (Target : Buffer_Slot; Offset : Bit_Unit; Size : Bit_Unit; Data : Address);

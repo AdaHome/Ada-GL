@@ -6,7 +6,7 @@ package GL.Drawings is
    use GL.C;
    use GL.C.Complete;
 
-   type Mode is (Line_Mode, Triangle_Mode);
+   type Mode is (Lines_Mode, Line_Strip_Mode, Triangles_Mode);
 
    procedure Draw (Item : Mode; From : Natural; Count : Natural);
 
@@ -19,8 +19,9 @@ private
    for Mode'Size use GLenum'Size;
    for Mode use
      (
-      Line_Mode => GL_LINES,
-      Triangle_Mode => GL_TRIANGLES
+      Lines_Mode => GL_LINES,
+      Line_Strip_Mode => GL_LINE_STRIP,
+      Triangles_Mode => GL_TRIANGLES
      );
 
 end;
