@@ -15,7 +15,8 @@ package GL.Uniforms is
    -- which should be a value returned by glGetUniformLocation.
    -- glUniform operates on the program object that was made part of current state by calling glUseProgram.
    -- glUniformMatrix4fv
-   procedure Modify (Item : Location; Data : Address);
+   procedure Modify_Matrix_4f (Item : Location; Data : Address);
+   procedure Modify_1f (Item : Location; Data : GLFloat);
 
    -- glGetUniformLocation
    function Get (From : GLuint; Name : String) return Location;

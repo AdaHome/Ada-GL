@@ -85,6 +85,7 @@ package GL.C.Complete is
    glGetProgramiv            : Accessories.glGetProgramiv;
    glGetProgramInfoLog       : Accessories.glGetProgramInfoLog;
    glUniformMatrix4fv        : Accessories.glUniformMatrix4fv;
+   glUniform1f               : Accessories.glUniform1f;
    glGetUniformLocation      : Accessories.glGetUniformLocation;
    glGenVertexArrays         : Accessories.glGenVertexArrays;
    glGenBuffers              : Accessories.glGenBuffers;

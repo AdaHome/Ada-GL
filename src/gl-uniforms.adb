@@ -10,11 +10,18 @@ package body GL.Uniforms is
       return GLint (Item);
    end;
 
-   procedure Modify (Item : Location; Data : Address) is
+   procedure Modify_Matrix_4f (Item : Location; Data : Address) is
       use GL.C.Complete;
       use GL.C;
    begin
       glUniformMatrix4fv (GLint (Item), 1, GL_FALSE, Data);
+   end;
+
+   procedure Modify_1f (Item : Location; Data : GLFloat) is
+      use GL.C.Complete;
+      use GL.C;
+   begin
+      glUniform1f (GLint (Item), Data);
    end;
 
    function Get (From : GLuint; Name : String) return Location is

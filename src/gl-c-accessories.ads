@@ -13,6 +13,7 @@ package GL.C.Accessories is
    type glGetShaderInfoLog        is access procedure (shader : GLuint; maxLength : GLsizei; length : out GLsizei; infoLog : Address) with Convention => StdCall;
    type glGetShaderiv             is access procedure (shader : GLuint; pname : GLenum; params : access GLint);
    type glUniformMatrix4fv        is access procedure (location : GLint; count : GLsizei; transpose : GLboolean; value : Address) with Convention => StdCall;
+   type glUniform1f               is access procedure (location : GLint; value : GLfloat) with Convention => StdCall;
    type glGetUniformLocation      is access function (program : GLuint; name : GLstring) return GLint with Convention => StdCall;
    type glGetAttribLocation       is access function (program : GLuint; name : GLstring) return GLint with Convention => StdCall;
    type glGenVertexArrays         is access procedure (n : GLsizei; arrays : access GLuint) with Convention => StdCall;
