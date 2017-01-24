@@ -1,11 +1,8 @@
 package body GL.Programs.Vertex_Attributes is
 
-
-
-
-   function Get (From : Program; Name : String) return Location is
+   function Get_Index_By_Name (From : Program; Name : String) return GL.Vertex_Attributes.Index is
    begin
-      return GL.Vertex_Attributes.Get (Identity (From), Name);
+      return GL.Vertex_Attributes.Get_Index_By_Name (Identity (From), Name);
    end;
 
 end;
