@@ -27,17 +27,15 @@ package GL.Buffers is
    --  GL_UNIFORM_BUFFER	Uniform block storage
    type Buffer_Slot is (Array_Slot, Element_Array_Slot);
 
+
    type Buffer_Usage is (Static_Usage, Dynamic_Usage);
 
    --  Depth_Plane : GL_COLOR_BUFFER_BIT
    --  Indicates the buffers currently enabled for color writing.
-   --
    --  Color_Plane : GL_DEPTH_BUFFER_BIT
    --  Indicates the depth buffer.
-   --
    --  GL_ACCUM_BUFFER_BIT
    --  Indicates the accumulation buffer.
-   --
    --  GL_STENCIL_BUFFER_BIT
    --  Indicates the stencil buffer.
    type Bitplane is (Depth_Plane, Color_Plane);--, Accumulation_Plane, Stencil_Plane);
@@ -48,25 +46,38 @@ package GL.Buffers is
    procedure Bind (To : Buffer_Slot; Item : Buffer);
 
 
+   -- glBufferData
    -- Create a new data store for a buffer object.
    -- Data that will be copied into the data store for initialization.
-   procedure Allocate_Init (Target : Buffer_Slot; Size : Byte_Unit; Data : Address; Usage : Buffer_Usage);
+   procedure Allocate_Initialized_Bytes (Target : Buffer_Slot; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
 
+   -- glBufferData
    -- Create a new data store for a buffer object.
    -- Data that will be copied into the data store for initialization.
-   procedure Allocate_Init (Target : Buffer_Slot; Size : Bit_Unit; Data : Address; Usage : Buffer_Usage);
+   procedure Allocate_Initialized_Bits (Target : Buffer_Slot; Size_Bits : Natural; Data : Address; Usage : Buffer_Usage);
 
+   -- glBufferData
    -- Create a new data store for a buffer object.
-   procedure Allocate (Target : Buffer_Slot; Size : Byte_Unit; Usage : Buffer_Usage);
+   procedure Allocate_Uninitialized_Bytes (Target : Buffer_Slot; Size_Bytes : Natural; Usage : Buffer_Usage);
 
+   -- glBufferData
    -- Create a new data store for a buffer object.
-   procedure Allocate (Target : Buffer_Slot; Size : Bit_Unit; Usage : Buffer_Usage);
+   procedure Allocate_Uninitialized_Bits (Target : Buffer_Slot; Size_Bytes : Natural; Usage : Buffer_Usage);
 
+   -- glGetBufferSubData
+   -- glGetBufferSubData and glGetNamedBufferSubData return some or all of the data contents of the data store of the specified buffer object.
+   -- Data starting at byte offset offset and extending for size bytes is copied from the buffer object's data store
+   -- to the memory pointed to by data. An error is thrown if the buffer object is currently mapped,
+   -- or if offset and size together define a range beyond the bounds of the buffer object's data store.
+   procedure Redefine_Bytes (Target : Buffer_Slot; Offset_Byte : Natural; Size_Byte : Natural; Data : System.Address);
 
+   -- glGetBufferSubData
+   -- glGetBufferSubData and glGetNamedBufferSubData return some or all of the data contents of the data store of the specified buffer object.
+   -- Data starting at byte offset offset and extending for size bytes is copied from the buffer object's data store
+   -- to the memory pointed to by data. An error is thrown if the buffer object is currently mapped,
+   -- or if offset and size together define a range beyond the bounds of the buffer object's data store.
+   procedure Redefine_Bits (Target : Buffer_Slot; Offset_Bits : Natural; Size_Bits : Natural; Data : System.Address);
 
-
-   procedure Redefine (Target : Buffer_Slot; Offset : Byte_Unit; Size : Byte_Unit; Data : Address);
-   procedure Redefine (Target : Buffer_Slot; Offset : Bit_Unit; Size : Bit_Unit; Data : Address);
 
    procedure Put_Line_Fancy (Item : Buffer);
 
