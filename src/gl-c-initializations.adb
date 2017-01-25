@@ -33,10 +33,17 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glIsBuffer);
    function Convert is new Unchecked_Conversion (Address, Accessories.glIsVertexArray);
    function Convert is new Unchecked_Conversion (Address, Accessories.glGetAttribLocation);
-   function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayAttribFormat);
    function Convert is new Unchecked_Conversion (Address, Accessories.glBufferSubData);
    function Convert is new Unchecked_Conversion (Address, Accessories.glDrawArrays);
    function Convert is new Unchecked_Conversion (Address, Accessories.glClear);
+
+
+   -- OpenGL Version 4.5
+   function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayAttribBinding);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayAttribFormat);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayVertexBuffer);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glEnableVertexArrayAttrib);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glCreateVertexArrays);
 
    procedure Initialize (Load : Loader) is
       use GL.C.Complete;
@@ -68,6 +75,16 @@ package body GL.C.Initializations is
       glIsBuffer                := Convert (Load ("glIsBuffer"));
       glIsVertexArray           := Convert (Load ("glIsVertexArray"));
       glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
+
+
+
+      -- OpenGL Version 4.5
+      glVertexArrayAttribBinding := Convert (Load ("glVertexArrayAttribBinding"));
+      glVertexArrayAttribFormat  := Convert (Load ("glVertexArrayAttribFormat"));
+      glVertexArrayVertexBuffer  := Convert (Load ("glVertexArrayVertexBuffer"));
+      glEnableVertexArrayAttrib  := Convert (Load ("glEnableVertexArrayAttrib"));
+      glCreateVertexArrays       := Convert (Load ("glCreateVertexArrays"));
    end;
+
 
 end;

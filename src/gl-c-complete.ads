@@ -101,6 +101,12 @@ package GL.C.Complete is
    glIsBuffer                : Accessories.glIsBuffer;
    glIsVertexArray           : Accessories.glIsVertexArray;
    glGetAttribLocation       : Accessories.glGetAttribLocation;
-   glVertexArrayAttribFormat : Accessories.glVertexArrayAttribFormat;
+
+   -- OpenGL Version 4.5
+   glVertexArrayAttribBinding : Accessories.glVertexArrayAttribBinding;
+   glVertexArrayAttribFormat  : Accessories.glVertexArrayAttribFormat;
+   glVertexArrayVertexBuffer  : Accessories.glVertexArrayVertexBuffer;
+   glEnableVertexArrayAttrib  : Accessories.glEnableVertexArrayAttrib;
+   glCreateVertexArrays       : Accessories.glCreateVertexArrays;
 
 end;

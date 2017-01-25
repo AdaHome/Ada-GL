@@ -27,9 +27,19 @@ package GL.C.Accessories is
    type glIsProgram               is access function (program : GLuint) return GLboolean with Convention => StdCall;
    type glIsBuffer                is access function (buffer : GLuint) return GLboolean with Convention => StdCall;
    type glIsVertexArray           is access function (arr : GLuint) return GLboolean with Convention => StdCall;
-   type glVertexArrayAttribFormat is access procedure (vaobj : GLuint; attribindex : GLuint; size : GLint; t : GLenum; normalized : GLboolean; relativeoffset : GLuint) with Convention => StdCall;
+
    type glBufferSubData           is access procedure (target : GLenum; offset : GLintptr; size : GLsizeiptr; data : Address) with Convention => StdCall;
    type glGetActiveAttrib         is access procedure (program : GLuint; index : GLuint; bufSize : GLsizei; length : out GLsizei; size : out GLint; kind : out GLenum; name : Address);
    type glDrawArrays              is access procedure (mode : GLenum; first : GLint; count : GLsizei) with Convention => StdCall;
    type glClear                   is access procedure (mask : GLbitfield) with Convention => StdCall;
+
+   -- OpenGL Version 4.5
+   type glVertexArrayAttribBinding is access procedure (vaobj : GLuint; attribindex : GLuint; bindingindex : GLuint) with Convention => StdCall;
+   type glVertexArrayAttribFormat is access procedure (vaobj : GLuint; attribindex : GLuint; size : GLint; t : GLenum; normalized : GLboolean; relativeoffset : GLuint) with Convention => StdCall;
+   type glVertexArrayVertexBuffer is access procedure (vaobj : GLuint; bindingindex : GLuint; buffer : GLuint; offset : GLintptr; stride : GLsizei) with Convention => StdCall;
+   type glEnableVertexArrayAttrib is access procedure (vaobj : GLuint; index : GLuint) with Convention => StdCall;
+   type glCreateVertexArrays is access procedure ( n : GLsizei; arrays : access GLuint);
+
+
+
 end;
