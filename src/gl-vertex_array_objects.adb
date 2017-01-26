@@ -4,7 +4,9 @@ use Ada.Text_IO;
 
 package body GL.Vertex_Array_Objects is
 
-   function Generate return Vertex_Array_Object is
+
+
+   function Generate_Attribute return Vertex_Array_Object is
       use GL.C;
       use GL.C.Complete;
       type S is array (1 .. 1) of aliased GLuint with Convention => C;
@@ -24,7 +26,9 @@ package body GL.Vertex_Array_Objects is
       return Vertex_Array_Object (Name_Array (Name_Array'First));
    end;
 
-   function Create return Vertex_Array_Object is
+
+
+   function Create_Attribute return Vertex_Array_Object is
       use GL.C;
       use GL.C.Complete;
       type S is array (1 .. 1) of aliased GLuint with Convention => C;
@@ -34,6 +38,8 @@ package body GL.Vertex_Array_Objects is
       return Vertex_Array_Object (Name_Array (Name_Array'First));
    end;
 
+
+
    procedure Bind (Item : Vertex_Array_Object) is
       use GL.C;
       use GL.C.Complete;
@@ -41,12 +47,16 @@ package body GL.Vertex_Array_Objects is
       glBindVertexArray (GLuint (Item));
    end;
 
+
+
    procedure Set_Attribute_Enable (Item : Attribute) is
       use GL.C;
       use GL.C.Complete;
    begin
       glEnableVertexAttribArray (GLuint (Item));
    end;
+
+
 
    procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Index : Attribute) is
       use GL.C;
@@ -57,13 +67,14 @@ package body GL.Vertex_Array_Objects is
 
 
 
-
    procedure Set_Attribute_Memory_Layout (Item : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Stride_Bytes : Natural; Offset_Bytes : Natural) is
       use GL.C;
       use GL.C.Complete;
    begin
       glVertexAttribPointer (GLuint (Item), GLint (Component_Count), Kind'Enum_Rep, Normalized'Enum_Rep, GLsizei (Stride_Bytes), System'To_Address (Offset_Bytes));
    end;
+
+
 
    procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Index : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural) is
       use GL.C;
@@ -73,6 +84,7 @@ package body GL.Vertex_Array_Objects is
    end;
 
 
+
    function Get_Attribute_By_Name (From_Program : GL.C.GLuint; Name : String) return Attribute is
       use GL.C.Complete;
       use Interfaces.C;
@@ -80,10 +92,13 @@ package body GL.Vertex_Array_Objects is
       return Attribute (glGetAttribLocation (From_Program, To_C (Name)));
    end;
 
+
+
    procedure Put_Line_Fancy (Item : Vertex_Array_Object) is
       use Ada.Text_IO;
    begin
       Put_Line ("Vertex array object name: " & Item'Img);
    end;
+
 
 end;

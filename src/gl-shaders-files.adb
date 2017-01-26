@@ -9,7 +9,7 @@ package body GL.Shaders.Files is
       File : File_Type;
       Stream_Item : Stream_Access;
    begin
-      Open  (File, In_File, String (Name));
+      Open (File, In_File, Name);
       Stream_Item := Stream (File);
       String'Read (Stream_Item, Content);
       Close (File);
