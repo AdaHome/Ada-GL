@@ -70,6 +70,12 @@ package GL.Buffers is
    procedure Bind (To : Buffer_Slot; Item : Buffer);
 
 
+   generic
+      type Object is private;
+      with function Data_Address (Data : Object) return System.Address;
+      with function Data_Size (Data : Object) return Natural;
+   procedure Generic_Allocate_Initialized (Target : Buffer_Slot; Obj : Object; Usage : Buffer_Usage);
+
 
    -- glBufferData
    -- Create a new data store for a buffer object.

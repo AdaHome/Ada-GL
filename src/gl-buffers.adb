@@ -4,13 +4,8 @@ with Ada.Text_IO;
 package body GL.Buffers is
 
    procedure Generate (Item : out Buffer_Array) is
-      --pragma Suppress (Index_Check);
-      --pragma Suppress (Range_Check);
-      --pragma Suppress (All_Checks);
    begin
-      --pragma Warnings (Off);
-      --Item := (others => 0);
-      --pragma Warnings (On);
+      Item := (others => 0);
       glGenBuffers (Item'Length, GLuint (Item (Item'First))'Unrestricted_Access);
    end;
 
@@ -24,6 +19,13 @@ package body GL.Buffers is
    procedure Bind (To : Buffer_Slot; Item : Buffer) is
    begin
       glBindBuffer (To'Enum_Rep, GLuint (Item));
+   end;
+
+
+
+   procedure Generic_Allocate_Initialized (Target : Buffer_Slot; Obj : Object; Usage : Buffer_Usage) is
+   begin
+      glBufferData (Target'Enum_Rep, GLsizeiptr (Data_Size (Obj) / System.Storage_Unit), Data_Address (Obj), Usage'Enum_Rep);
    end;
 
    procedure Allocate_Initialized_Bytes (Target : Buffer_Slot; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage) is

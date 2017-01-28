@@ -1,3 +1,4 @@
+with Ada.Text_IO;
 with Ada.Numerics.Generic_Elementary_Functions;
 with GL.C;
 
@@ -6,6 +7,7 @@ package GL.Math is
    subtype GLfloat is GL.C.GLfloat;
    use type GLfloat;
 
+   package GLfloat_IO is new Ada.Text_IO.Float_IO (GLfloat);
    package Elementary_Functions is new Ada.Numerics.Generic_Elementary_Functions (GLfloat);
 
    subtype Dimension is Integer;
