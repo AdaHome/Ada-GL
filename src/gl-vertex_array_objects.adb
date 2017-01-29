@@ -49,47 +49,47 @@ package body GL.Vertex_Array_Objects is
 
 
 
-   procedure Set_Attribute_Enable (Item : Attribute) is
+   procedure Set_Attribute_Enable (Attribute : Component_Attribute) is
       use GL.C;
       use GL.C.Complete;
    begin
-      glEnableVertexAttribArray (GLuint (Item));
+      glEnableVertexAttribArray (GLuint (Attribute));
    end;
 
 
 
-   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Index : Attribute) is
+   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Attribute : Component_Attribute) is
       use GL.C;
       use GL.C.Complete;
    begin
-      glEnableVertexArrayAttrib (GLuint (Item), GLuint (Index));
+      glEnableVertexArrayAttrib (GLuint (Item), GLuint (Attribute));
    end;
 
 
 
-   procedure Set_Attribute_Memory_Layout (Item : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Stride_Bytes : Natural; Offset_Bytes : Natural) is
+   procedure Set_Attribute_Memory_Layout (Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Stride_Bytes : Natural; Offset_Bytes : Natural) is
       use GL.C;
       use GL.C.Complete;
    begin
-      glVertexAttribPointer (GLuint (Item), GLint (Component_Count), Kind'Enum_Rep, Normalized'Enum_Rep, GLsizei (Stride_Bytes), System'To_Address (Offset_Bytes));
+      glVertexAttribPointer (GLuint (Attribute), GLint (Count), Kind'Enum_Rep, Normalized'Enum_Rep, GLsizei (Stride_Bytes), System'To_Address (Offset_Bytes));
    end;
 
 
 
-   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Index : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural) is
+   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural) is
       use GL.C;
       use GL.C.Complete;
    begin
-      glVertexArrayAttribFormat (GLuint (VAO), GLuint (Index), GLint (Component_Count), Kind'Enum_Rep, Normalized'Enum_Rep, GLuint (Offset_Bytes));
+      glVertexArrayAttribFormat (GLuint (VAO), GLuint (Attribute), GLint (Count), Kind'Enum_Rep, Normalized'Enum_Rep, GLuint (Offset_Bytes));
    end;
 
 
 
-   function Get_Attribute_By_Name (From_Program : GL.C.GLuint; Name : String) return Attribute is
+   function Get_Attribute_By_Name (From_Program : GL.C.GLuint; Name : String) return Component_Attribute is
       use GL.C.Complete;
       use Interfaces.C;
    begin
-      return Attribute (glGetAttribLocation (From_Program, To_C (Name)));
+      return Component_Attribute (glGetAttribLocation (From_Program, To_C (Name)));
    end;
 
 

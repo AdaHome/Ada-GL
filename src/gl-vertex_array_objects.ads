@@ -9,12 +9,13 @@ package GL.Vertex_Array_Objects is
 
 
    -- Generic vertex attribute to be used.
-   type Attribute is new GL.C.GLuint;
+   type Component_Attribute is new GL.C.GLuint;
 
 
    -- Specifies the data type of each component in the array.
    type Component_Kind is (Byte_Type, Unsigned_Byte_Type, Short_Type, Unsigned_Short_Type, Float_Type, Fixed_Type);
 
+   type Component_Count is new GL.C.GLint;
 
    --  glGenVertexArrays returns n vertex array object names in arrays.
    --  There is no guarantee that the names form a contiguous set of integers;
@@ -48,7 +49,7 @@ package GL.Vertex_Array_Objects is
    --glDisableVertexAttribArray disables the generic vertex attribute array specified by index.
    --By default, all client-side capabilities are disabled, including all generic vertex attribute arrays.
    --If enabled, the values in the generic vertex attribute array will be accessed and used for rendering when calls are made to vertex array commands such as glDrawArrays or glDrawElements.
-   procedure Set_Attribute_Enable (Item : Attribute);
+   procedure Set_Attribute_Enable (Attribute : Component_Attribute);
 
 
 
@@ -58,7 +59,7 @@ package GL.Vertex_Array_Objects is
    -- glDisableVertexAttribArray and glDisableVertexArrayAttrib disable the generic vertex attribute array specified by index.
    -- glDisableVertexAttribArray uses currently bound vertex array object for the operation,
    -- whereas glDisableVertexArrayAttrib updates state of the vertex array object with ID vaobj.
-   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Index : Attribute);
+   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Attribute : Component_Attribute);
 
 
 
@@ -73,7 +74,7 @@ package GL.Vertex_Array_Objects is
    -- are to be mapped to the range [-1,1] (for signed values) or [0,1] (for unsigned values)
    -- when they are accessed and converted to floating point. Otherwise, values will be converted to
    -- floats directly without normalization.
-   procedure Set_Attribute_Memory_Layout (Item : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Stride_Bytes : Natural; Offset_Bytes : Natural);
+   procedure Set_Attribute_Memory_Layout (Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Stride_Bytes : Natural; Offset_Bytes : Natural);
 
 
 
@@ -85,7 +86,7 @@ package GL.Vertex_Array_Objects is
    -- last three ones modify the state of a vertex array object with ID vaobj.
    -- attribindex specifies the index of the generic vertex attribute array whose data layout is being described,
    -- and must be less than the value of GL_MAX_VERTEX_ATTRIBS.
-   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Index : Attribute; Component_Count : Natural; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural);
+   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural);
 
 
 
@@ -96,7 +97,7 @@ package GL.Vertex_Array_Objects is
    -- If name is a matrix attribute variable, the index of the first column of the matrix is returned.
    -- If the named attribute variable is not an active attribute in the specified
    -- program object or if name starts with the reserved prefix "gl_", a value of -1 is returned.
-   function Get_Attribute_By_Name (From_Program : GL.C.GLuint; Name : String) return Attribute;
+   function Get_Attribute_By_Name (From_Program : GL.C.GLuint; Name : String) return Component_Attribute;
 
 
 
