@@ -61,6 +61,12 @@ package GL.Buffers is
    function Generate return Buffer;
 
 
+   -- glCreateBuffers returns n previously unused buffer names in buffers,
+   -- each representing a new buffer object initialized as if it had been bound to an unspecified target.
+   function Create_Buffer return Buffer;
+
+   procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
+
 
    -- glBindBuffer binds a buffer object to the specified buffer binding point.
    -- Calling glBindBuffer with target set to one of the accepted symbolic

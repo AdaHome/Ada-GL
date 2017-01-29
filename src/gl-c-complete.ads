@@ -108,5 +108,7 @@ package GL.C.Complete is
    glVertexArrayVertexBuffer  : Accessories.glVertexArrayVertexBuffer;
    glEnableVertexArrayAttrib  : Accessories.glEnableVertexArrayAttrib;
    glCreateVertexArrays       : Accessories.glCreateVertexArrays;
+   glCreateBuffers            : Accessories.glCreateBuffers;
+   glNamedBufferData          : Accessories.glNamedBufferData;
 
 end;

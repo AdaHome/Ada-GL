@@ -12,7 +12,16 @@ package body GL.Buffers is
    function Generate return Buffer is
       Item : Buffer_Array (1 .. 1);
    begin
-      Generate (Item);
+      Item := (others => 0);
+      glGenBuffers (Item'Length, GLuint (Item (Item'First))'Unrestricted_Access);
+      return Item (Item'First);
+   end;
+
+   function Create_Buffer return Buffer is
+      Item : Buffer_Array (1 .. 1);
+   begin
+      Item := (others => 0);
+      glCreateBuffers (Item'Length, GLuint (Item (Item'First))'Unrestricted_Access);
       return Item (Item'First);
    end;
 
@@ -21,6 +30,10 @@ package body GL.Buffers is
       glBindBuffer (To'Enum_Rep, GLuint (Item));
    end;
 
+   procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage) is
+   begin
+      glNamedBufferData (GLuint (B), GLsizeiptr (Size_Bytes), Data, Usage'Enum_Rep);
+   end;
 
 
    procedure Generic_Allocate_Initialized (Target : Buffer_Slot; Obj : Object; Usage : Buffer_Usage) is

@@ -38,8 +38,9 @@ package GL.C.Accessories is
    type glVertexArrayAttribFormat is access procedure (vaobj : GLuint; attribindex : GLuint; size : GLint; t : GLenum; normalized : GLboolean; relativeoffset : GLuint) with Convention => StdCall;
    type glVertexArrayVertexBuffer is access procedure (vaobj : GLuint; bindingindex : GLuint; buffer : GLuint; offset : GLintptr; stride : GLsizei) with Convention => StdCall;
    type glEnableVertexArrayAttrib is access procedure (vaobj : GLuint; index : GLuint) with Convention => StdCall;
-   type glCreateVertexArrays is access procedure ( n : GLsizei; arrays : access GLuint);
-
+   type glCreateVertexArrays is access procedure ( n : GLsizei; arrays : access GLuint) with Convention => StdCall;
+   type glCreateBuffers is access procedure (n : GLsizei; buffers : access GLuint) with Convention => StdCall;
+   type glNamedBufferData is access procedure (buffer : GLuint; size : GLsizeiptr; data : Address; usage : GLenum) with Convention => StdCall;
 
 
 end;
