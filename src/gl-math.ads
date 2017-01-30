@@ -31,19 +31,12 @@ package GL.Math is
    subtype Float_Matrix3 is Float_Matrix (Dimension3, Dimension3);
    subtype Float_Matrix4 is Float_Matrix (Dimension4, Dimension4);
 
-   package Colors_RGBA is
-      subtype Color_Amount is GLfloat range 0.0 .. 1.0;
-      type Color_Index is (Red_Index, Green_Index, Blue_Index, Alpha_Index);
-      type Color_Amount_Vector is array (Color_Index) of Color_Amount;
-      Black_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 0.0, 0.0, 1.0);
-      White_Color_Amount_Vector : constant Color_Amount_Vector := (1.0, 1.0, 1.0, 1.0);
-      Red_Color_Amount_Vector : constant Color_Amount_Vector := (1.0, 0.0, 0.0, 1.0);
-      Green_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 1.0, 0.0, 1.0);
-      Blue_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 0.0, 1.0, 1.0);
-   end;
+
 
    type Data_Kind is (Float_Matrix4_Kind, Float_Vector3_Kind, Float_Vector4_Kind);
 
+
+   procedure Get (F : Ada.Text_IO.File_Type; Item : out Float_Vector);
 
 
 end;
