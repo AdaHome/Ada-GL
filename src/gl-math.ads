@@ -1,11 +1,14 @@
 with Ada.Text_IO;
 with Ada.Numerics.Generic_Elementary_Functions;
 with GL.C;
+with Ada.Numerics.Discrete_Random;
+with Ada.Numerics.Float_Random;
 
 package GL.Math is
 
    subtype GLfloat is GL.C.GLfloat;
    use type GLfloat;
+
 
    package GLfloat_IO is new Ada.Text_IO.Float_IO (GLfloat);
    package Elementary_Functions is new Ada.Numerics.Generic_Elementary_Functions (GLfloat);
@@ -28,12 +31,15 @@ package GL.Math is
    subtype Float_Matrix3 is Float_Matrix (Dimension3, Dimension3);
    subtype Float_Matrix4 is Float_Matrix (Dimension4, Dimension4);
 
-   package Colors is
-      subtype Color_Amount_Float is GLfloat range 0.0 .. 1.0;
-      type Color_RGBA is (Red, Green, Blue, Alpha);
-      type Color_ARGB is (Alpha, Red, Green, Blue);
-      type Color_Amount_Float_Vector_RGBA is array (Color_RGBA) of Color_Amount_Float;
-      type Color_Amount_Float_Vector_ARGB is array (Color_ARGB) of Color_Amount_Float;
+   package Colors_RGBA is
+      subtype Color_Amount is GLfloat range 0.0 .. 1.0;
+      type Color_Index is (Red_Index, Green_Index, Blue_Index, Alpha_Index);
+      type Color_Amount_Vector is array (Color_Index) of Color_Amount;
+      Black_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 0.0, 0.0, 1.0);
+      White_Color_Amount_Vector : constant Color_Amount_Vector := (1.0, 1.0, 1.0, 1.0);
+      Red_Color_Amount_Vector : constant Color_Amount_Vector := (1.0, 0.0, 0.0, 1.0);
+      Green_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 1.0, 0.0, 1.0);
+      Blue_Color_Amount_Vector : constant Color_Amount_Vector := (0.0, 0.0, 1.0, 1.0);
    end;
 
    type Data_Kind is (Float_Matrix4_Kind, Float_Vector3_Kind, Float_Vector4_Kind);

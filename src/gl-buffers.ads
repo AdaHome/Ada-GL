@@ -12,9 +12,11 @@ package GL.Buffers is
    -- Buffer object name
    type Buffer is new GLuint range 0 .. GLuint'Last;
 
+
    type Buffer_Array is array (Integer range <>) of aliased Buffer;
 
 
+   --  Legacy
    --  Array_Slot	        Vertex attributes
    --  GL_ATOMIC_COUNTER_BUFFER	Atomic counter storage
    --  GL_COPY_READ_BUFFER	Buffer copy source
@@ -36,36 +38,21 @@ package GL.Buffers is
    type Buffer_Usage is (Static_Usage, Dynamic_Usage);
 
 
-
-   --  Depth_Plane : GL_COLOR_BUFFER_BIT
-   --  Indicates the buffers currently enabled for color writing.
-   --  Color_Plane : GL_DEPTH_BUFFER_BIT
-   --  Indicates the depth buffer.
-   --  GL_ACCUM_BUFFER_BIT
-   --  Indicates the accumulation buffer.
-   --  GL_STENCIL_BUFFER_BIT
-   --  Indicates the stencil buffer.
-   type Bitplane is (Depth_Plane, Color_Plane);
-
-
-
    -- glGenBuffers returns Item'Length buffer object names in buffers.
    -- There is no guarantee that the names form a contiguous set of integers;
    -- however, it is guaranteed that none of the returned names was in use
    -- immediately before the call to glGenBuffers.
-   procedure Generate (Item : out Buffer_Array);
+   procedure Generate_Buffer (Item : out Buffer_Array);
 
 
 
    -- Generate one buffer object name.
-   function Generate return Buffer;
+   function Generate_Buffer return Buffer;
 
 
    -- glCreateBuffers returns n previously unused buffer names in buffers,
    -- each representing a new buffer object initialized as if it had been bound to an unspecified target.
    function Create_Buffer return Buffer;
-
-   procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
 
 
    -- glBindBuffer binds a buffer object to the specified buffer binding point.
@@ -76,63 +63,13 @@ package GL.Buffers is
    procedure Bind (To : Buffer_Slot; Item : Buffer);
 
 
-   generic
-      type Object is private;
-      with function Data_Address (Data : Object) return System.Address;
-      with function Data_Size (Data : Object) return Natural;
-   procedure Generic_Allocate_Initialized (Target : Buffer_Slot; Obj : Object; Usage : Buffer_Usage);
-
-
-   -- glBufferData
-   -- Create a new data store for a buffer object.
-   -- Data that will be copied into the data store for initialization.
-   procedure Allocate_Initialized_Bytes (Target : Buffer_Slot; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
-
-
-   -- glBufferData
-   -- Create a new data store for a buffer object.
-   -- Data that will be copied into the data store for initialization.
-   procedure Allocate_Initialized_Bits (Target : Buffer_Slot; Size_Bits : Natural; Data : Address; Usage : Buffer_Usage);
-
-
-   -- glBufferData
-   -- Create a new data store for a buffer object.
-   procedure Allocate_Uninitialized_Bytes (Target : Buffer_Slot; Size_Bytes : Natural; Usage : Buffer_Usage);
-
-
-   -- glBufferData
-   -- Create a new data store for a buffer object.
-   procedure Allocate_Uninitialized_Bits (Target : Buffer_Slot; Size_Bytes : Natural; Usage : Buffer_Usage);
-
-
-   -- glGetBufferSubData
-   -- glGetBufferSubData and glGetNamedBufferSubData return some or all of the data contents of the data store of the specified buffer object.
-   -- Data starting at byte offset offset and extending for size bytes is copied from the buffer object's data store
-   -- to the memory pointed to by data. An error is thrown if the buffer object is currently mapped,
-   -- or if offset and size together define a range beyond the bounds of the buffer object's data store.
-   procedure Redefine_Bytes (Target : Buffer_Slot; Offset_Byte : Natural; Size_Byte : Natural; Data : System.Address);
-
-   -- glGetBufferSubData
-   -- glGetBufferSubData and glGetNamedBufferSubData return some or all of the data contents of the data store of the specified buffer object.
-   -- Data starting at byte offset offset and extending for size bytes is copied from the buffer object's data store
-   -- to the memory pointed to by data. An error is thrown if the buffer object is currently mapped,
-   -- or if offset and size together define a range beyond the bounds of the buffer object's data store.
-   procedure Redefine_Bits (Target : Buffer_Slot; Offset_Bits : Natural; Size_Bits : Natural; Data : System.Address);
-
-
-   procedure Put_Line_Fancy (Item : Buffer);
-
-
-   -- glClear sets the bitplane area of the window to values previously selected by
-   -- glClearColor, glClearIndex, glClearDepth, glClearStencil, and glClearAccum.
-   -- Multiple color buffers can be cleared simultaneously by selecting more than one buffer at a time using glDrawBuffer.
-   procedure Clear (Item : Bitplane);
-
-
-
+   procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
+   --procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Usage : Buffer_Usage);
 
    function Identity (Item : Buffer) return GLuint;
 
+
+   procedure Put_Line_Fancy (Item : Buffer);
 
 
 private
@@ -155,11 +92,6 @@ private
       Dynamic_Usage => GL_DYNAMIC_DRAW
      );
 
-   for Bitplane'Size use GLbitfield'Size;
-   for Bitplane use
-     (
-      Depth_Plane => GL_DEPTH_BUFFER_BIT,
-      Color_Plane => GL_COLOR_BUFFER_BIT
-     );
+
 
 end;

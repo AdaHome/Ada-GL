@@ -11,4 +11,9 @@ package body GL.Drawings is
       glViewport (GLint (X), GLint (Y), GLsizei (Width), GLsizei (Height));
    end;
 
+   procedure Clear (Item : Bitplane) is
+   begin
+      glClear (Item'Enum_Rep);
+   end;
+
 end;
