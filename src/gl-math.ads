@@ -20,16 +20,16 @@ package GL.Math is
    subtype Dimension4 is Integer range 1 .. 4;
 
    type Float_Vector is array (Dimension range <>) of GLfloat;
-   subtype Float_Vector1 is Float_Vector (Dimension1);
-   subtype Float_Vector2 is Float_Vector (Dimension2);
-   subtype Float_Vector3 is Float_Vector (Dimension3);
-   subtype Float_Vector4 is Float_Vector (Dimension4);
+   type Float_Vector1 is new Float_Vector (Dimension1);
+   type Float_Vector2 is new Float_Vector (Dimension2);
+   type Float_Vector3 is new Float_Vector (Dimension3);
+   type Float_Vector4 is new Float_Vector (Dimension4);
 
    type Float_Matrix is array (Dimension range <>, Dimension range <>) of GLfloat;
-   subtype Float_Matrix1 is Float_Matrix (Dimension1, Dimension1);
-   subtype Float_Matrix2 is Float_Matrix (Dimension2, Dimension2);
-   subtype Float_Matrix3 is Float_Matrix (Dimension3, Dimension3);
-   subtype Float_Matrix4 is Float_Matrix (Dimension4, Dimension4);
+   type Float_Matrix1 is new Float_Matrix (Dimension1, Dimension1);
+   type Float_Matrix2 is new Float_Matrix (Dimension2, Dimension2);
+   type Float_Matrix3 is new Float_Matrix (Dimension3, Dimension3);
+   type Float_Matrix4 is new Float_Matrix (Dimension4, Dimension4);
 
 
 
