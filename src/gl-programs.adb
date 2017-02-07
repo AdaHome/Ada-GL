@@ -1,11 +1,9 @@
 with GL.C.Complete;
-with GL.C.Initializations;
 with Interfaces.C;
 
 package body GL.Programs is
 
    use GL.C.Complete;
-   use GL.C.Initializations;
 
 
 

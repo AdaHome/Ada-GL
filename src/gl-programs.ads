@@ -6,7 +6,7 @@ package GL.Programs is
    use GL.C;
    use GL.C.Complete;
 
-   type Program (<>) is private;
+   type Program is private;
 
    type Program_Info is (Delete_Info, Compile_Info, Link_Info, Log_Length_Info);
 

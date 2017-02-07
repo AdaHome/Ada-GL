@@ -41,6 +41,8 @@ package GL.C.Accessories is
    type glCreateVertexArrays is access procedure ( n : GLsizei; arrays : access GLuint) with Convention => StdCall;
    type glCreateBuffers is access procedure (n : GLsizei; buffers : access GLuint) with Convention => StdCall;
    type glNamedBufferData is access procedure (buffer : GLuint; size : GLsizeiptr; data : Address; usage : GLenum) with Convention => StdCall;
+   type glNamedBufferSubData is access procedure (buffer : GLuint; offset : GLintptr; size : GLsizei; data : Address) with Convention => StdCall;
+
 
 
 end;

@@ -65,6 +65,7 @@ package GL.Buffers is
 
    procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);
    --procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Usage : Buffer_Usage);
+   procedure Redefine_Storage (B : Buffer; Offset_Byte : Natural; Size_Bytes : Natural; Data : Address);
 
    function Identity (Item : Buffer) return GLuint;
 

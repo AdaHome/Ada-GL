@@ -35,6 +35,10 @@ package body GL.Buffers is
       glNamedBufferData (GLuint (B), GLsizeiptr (Size_Bytes), Data, Usage'Enum_Rep);
    end;
 
+   procedure Redefine_Storage (B : Buffer; Offset_Byte : Natural; Size_Bytes : Natural; Data : Address) is
+   begin
+      glNamedBufferSubData (GLuint (B), GLintptr (Offset_Byte), GLsizei (Size_Bytes), Data);
+   end;
 
    procedure Put_Line_Fancy (Item : Buffer) is
       use Ada.Text_IO;

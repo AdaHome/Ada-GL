@@ -46,6 +46,7 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateVertexArrays);
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateBuffers);
    function Convert is new Unchecked_Conversion (Address, Accessories.glNamedBufferData);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glNamedBufferSubData);
 
    procedure Initialize (Load : Loader) is
       use GL.C.Complete;
@@ -88,6 +89,7 @@ package body GL.C.Initializations is
       glCreateVertexArrays       := Convert (Load ("glCreateVertexArrays"));
       glCreateBuffers            := Convert (Load ("glCreateBuffers"));
       glNamedBufferData          := Convert (Load ("glNamedBufferData"));
+      glNamedBufferSubData       := Convert (Load ("glNamedBufferSubData"));
 
    end;
 

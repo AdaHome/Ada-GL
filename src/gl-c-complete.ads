@@ -110,5 +110,6 @@ package GL.C.Complete is
    glCreateVertexArrays       : Accessories.glCreateVertexArrays;
    glCreateBuffers            : Accessories.glCreateBuffers;
    glNamedBufferData          : Accessories.glNamedBufferData;
+   glNamedBufferSubData       : Accessories.glNamedBufferSubData;
 
 end;
