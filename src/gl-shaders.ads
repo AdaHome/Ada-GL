@@ -10,7 +10,7 @@ package GL.Shaders is
    type Shader_Info is (Stage_Info, Delete_Info, Compile_Info, Log_Length_Info, Source_Length_Info);
 
    -- Specifies the handle of the shader object whose source code is to be replaced.
-   type Shader (<>) is private;
+   type Shader is private;
 
    function Identity (Item : Shader) return GLuint;
    function Create_Empty (Kind : Shader_Stage) return Shader;
