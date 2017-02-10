@@ -2,8 +2,8 @@ with Ada.Exceptions;
 
 package body GL.Colors is
 
-   package body Colors_RGBA is
-      procedure Get (F : Ada.Text_IO.File_Type; Item : out Color_Amount_Vector) is
+   package body RGBA is
+      procedure Get (F : Ada.Text_IO.File_Type; Item : out Vector) is
          use Ada.Text_IO;
          use GL.Math.GLfloat_IO;
       begin

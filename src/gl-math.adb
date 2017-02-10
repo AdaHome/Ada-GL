@@ -3,7 +3,7 @@ with Ada.Exceptions;
 
 package body GL.Math is
 
-   procedure Get (F : Ada.Text_IO.File_Type; Item : out Float_Vector) is
+   procedure Get (F : Ada.Text_IO.File_Type; Item : out Real_Float_Vector) is
       use Ada.Text_IO;
       use GL.Math.GLfloat_IO;
    begin

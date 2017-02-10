@@ -1,3 +1,4 @@
+with GL.Math;
 with Interfaces.C;
 with Ada.Text_IO;
 use Ada.Text_IO;

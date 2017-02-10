@@ -12,6 +12,7 @@ package GL.C is
    subtype GLbitfield   is unsigned;
    subtype GLboolean    is unsigned_char;
    subtype GLfloat      is C_float;
+   subtype GLdouble     is double;
    subtype GLint        is int;
    subtype GLintptr     is ptrdiff_t;
    subtype GLuint       is unsigned;
