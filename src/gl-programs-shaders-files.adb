@@ -1,7 +1,7 @@
 with Ada.Streams.Stream_IO;
 with Ada.Directories;
 
-package body GL.Shaders.Files is
+package body GL.Programs.Shaders.Files is
 
 
    procedure Read (Name : String; Content : out String) is
@@ -22,6 +22,15 @@ package body GL.Shaders.Files is
    begin
       Read (Name, Source_Buffer);
       Set_Source (Item, Source_Buffer);
+      null;
+   end;
+
+   procedure Set_Source_File (Item : Shader; Name : String; Source_Buffer : out String) is
+      use Ada.Directories;
+      subtype I is Integer range Source_Buffer'First .. Source_Buffer'First + Natural (Size (Name)) - 1;
+   begin
+      Read (Name, Source_Buffer (I));
+      Set_Source (Item, Source_Buffer (I));
       null;
    end;
 

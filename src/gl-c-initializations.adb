@@ -8,6 +8,8 @@ package body GL.C.Initializations is
    use Ada;
 
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateProgram);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glDeleteProgram);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glDeleteShader);
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateShader);
    function Convert is new Unchecked_Conversion (Address, Accessories.glAttachShader);
    function Convert is new Unchecked_Conversion (Address, Accessories.glLinkProgram);
@@ -52,6 +54,8 @@ package body GL.C.Initializations is
       use GL.C.Complete;
    begin
       glCreateProgram           := Convert (Load ("glCreateProgram"));
+      glDeleteProgram           := Convert (Load ("glDeleteProgram"));
+      glDeleteShader            := Convert (Load ("glDeleteShader"));
       glCreateShader            := Convert (Load ("glCreateShader"));
       glAttachShader            := Convert (Load ("glAttachShader"));
       glLinkProgram             := Convert (Load ("glLinkProgram"));

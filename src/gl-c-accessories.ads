@@ -1,6 +1,8 @@
 package GL.C.Accessories is
 
    type glCreateProgram           is access function return GLuint with Convention => StdCall;
+   type glDeleteProgram           is access procedure (program : GLuint) with Convention => StdCall;
+   type glDeleteShader            is access procedure (shader : GLuint) with Convention => StdCall;
    type glLinkProgram             is access procedure (program : GLuint) with Convention => StdCall;
    type glGetProgramiv            is access procedure (program : GLuint; pname : GLenum; params : access GLint) with Convention => StdCall;
    type glGetProgramInfoLog       is access procedure (program : GLuint; maxLength : GLsizei; length : access GLsizei; infoLog : Address) with Convention => StdCall;

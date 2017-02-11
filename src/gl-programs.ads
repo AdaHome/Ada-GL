@@ -13,6 +13,7 @@ package GL.Programs is
    function Identity (Item : Program) return GLuint;
    function Validate (Item : Program) return Boolean;
    function Create_Empty return Program;
+   procedure Delete (Item : Program);
    procedure Link (Item : Program);
    procedure Link_Checked (Item : Program);
    procedure Set_Current (Item : Program);

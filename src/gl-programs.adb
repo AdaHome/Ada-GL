@@ -14,6 +14,11 @@ package body GL.Programs is
       return P;
    end;
 
+   procedure Delete (Item : Program) is
+   begin
+      glDeleteProgram (GLuint (Item));
+   end;
+
    procedure Link (Item : Program) is
       use GL.C;
    begin
@@ -21,10 +26,13 @@ package body GL.Programs is
    end;
 
    procedure Link_Checked (Item : Program) is
+      Log_Buffer : String (1 .. 1000);
+      Log_Length : Natural;
    begin
       Link (Item);
       if not Link_Succeess (Item) then
-         raise Link_Error;
+         Get_Link_Log (Item, Log_Buffer, Log_Length);
+         raise Link_Error with Log_Buffer (1 .. Log_Length);
       end if;
    end;
 

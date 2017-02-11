@@ -75,6 +75,8 @@ package GL.C.Complete is
 
 
    glCreateProgram           : Accessories.glCreateProgram;
+   glDeleteProgram           : Accessories.glDeleteProgram;
+   glDeleteShader            : Accessories.glDeleteShader;
    glCreateShader            : Accessories.glCreateShader;
    glAttachShader            : Accessories.glAttachShader;
    glLinkProgram             : Accessories.glLinkProgram;
