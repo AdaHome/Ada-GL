@@ -41,7 +41,8 @@ package GL.C.Complete is
    GL_RED                  : constant := 16#1903#;
    GL_GREEN                : constant := 16#1904#;
    GL_BLUE                 : constant := 16#1905#;
-
+   GL_RGB                  : constant := 16#1907#;
+   GL_RGBA                 : constant := 16#1908#;
    GL_NEAREST              : constant := 16#2600#;
    GL_LINEAR               : constant := 16#2601#;
    GL_CLAMP                : constant := 16#2900#;
@@ -58,6 +59,12 @@ package GL.C.Complete is
    GL_TEXTURE_MIN_FILTER   : constant := 16#2801#;
    GL_TEXTURE_WRAP_S       : constant := 16#2802#;
    GL_TEXTURE_WRAP_T       : constant := 16#2803#;
+
+
+   GL_RGBA2                : constant :=  16#8055#;
+   GL_R8                   : constant :=  16#8229#;
+   GL_R16                  : constant :=  16#822A#;
+
    procedure glViewport (x : GLint; y : GLint; width : GLsizei; height : GLsizei) with
      Import,
      Convention => StdCall,
@@ -142,4 +149,8 @@ package GL.C.Complete is
    glNamedBufferData          : Accessories.glNamedBufferData;
    glNamedBufferSubData       : Accessories.glNamedBufferSubData;
 
+   glTextureParameteri       : Accessories.glTextureParameteri;
+   glTextureSubImage2D       : Accessories.glTextureSubImage2D;
+   glCreateTextures          : Accessories.glCreateTextures;
+   glTextureStorage2D        : Accessories.glTextureStorage2D;
 end;

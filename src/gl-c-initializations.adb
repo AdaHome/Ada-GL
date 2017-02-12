@@ -57,6 +57,11 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateBuffers);
    function Convert is new Unchecked_Conversion (Address, Accessories.glNamedBufferData);
    function Convert is new Unchecked_Conversion (Address, Accessories.glNamedBufferSubData);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTextureParameteri);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTextureSubImage2D);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glCreateTextures);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTextureStorage2D);
+
 
    procedure Initialize (Load : Loader) is
       use GL.C.Complete;
@@ -108,6 +113,10 @@ package body GL.C.Initializations is
       glNamedBufferData          := Convert (Load ("glNamedBufferData"));
       glNamedBufferSubData       := Convert (Load ("glNamedBufferSubData"));
 
+      glTextureParameteri       := Convert (Load ("glTextureParameteri"));
+      glTextureSubImage2D       := Convert (Load ("glTextureSubImage2D"));
+      glTextureStorage2D        := Convert (Load ("glTextureStorage2D"));
+      glCreateTextures          := Convert (Load ("glCreateTextures"));
    end;
 
 

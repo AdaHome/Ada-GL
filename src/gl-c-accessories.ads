@@ -53,6 +53,8 @@ package GL.C.Accessories is
    type glNamedBufferData is access procedure (buffer : GLuint; size : GLsizeiptr; data : Address; usage : GLenum) with Convention => StdCall;
    type glNamedBufferSubData is access procedure (buffer : GLuint; offset : GLintptr; size : GLsizei; data : Address) with Convention => StdCall;
 
-
-
+   type glTextureParameteri is access procedure (texture : GLuint; pname : GLenum; param : GLint) with Convention => StdCall;
+   type glTextureSubImage2D is access procedure (texture : GLuint; level: GLint; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; format : GLenum; kind : GLenum; data : Address) with Convention => StdCall;
+   type glTextureStorage2D  is access procedure (texture : GLuint; levels: GLint; internalformat : GLenum; width : GLsizei; height : GLsizei) with Convention => StdCall;
+   type glCreateTextures    is access procedure (target : GLenum; n : GLsizei; textures : access GLuint) with Convention => StdCall;
 end;
