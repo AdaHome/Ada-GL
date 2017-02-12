@@ -30,6 +30,14 @@ package GL.C.Accessories is
    type glIsBuffer                is access function (buffer : GLuint) return GLboolean with Convention => StdCall;
    type glIsVertexArray           is access function (arr : GLuint) return GLboolean with Convention => StdCall;
 
+   type glPixelStorei             is access procedure (pname : GLenum; param : GLint) with Convention => StdCall;
+   type glGenTextures             is access procedure (n : GLsizei; textures : access GLuint) with Convention => StdCall;
+   type glBindTexture             is access procedure (target : GLenum; texture : GLuint) with Convention => StdCall;
+   type glTexImage2D              is access procedure (target : GLenum; level: GLint; internalFormat : GLint; width : GLsizei; height : GLsizei; border : GLint; format : GLenum; kind : GLenum; data : Address) with Convention => StdCall;
+   type glTexParameteri           is access procedure (target : GLenum; pname : GLenum; param : GLint) with Convention => StdCall;
+   type glIsTexture               is access function (texture : GLuint) return GLboolean with Convention => StdCall;
+   type glActiveTexture           is access procedure (texture : GLenum) with Convention => StdCall;
+
    type glBufferSubData           is access procedure (target : GLenum; offset : GLintptr; size : GLsizeiptr; data : Address) with Convention => StdCall;
    type glGetActiveAttrib         is access procedure (program : GLuint; index : GLuint; bufSize : GLsizei; length : out GLsizei; size : out GLint; kind : out GLenum; name : Address);
    type glDrawArrays              is access procedure (mode : GLenum; first : GLint; count : GLsizei) with Convention => StdCall;

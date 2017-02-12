@@ -36,8 +36,28 @@ package GL.C.Complete is
    GL_COLOR_BUFFER_BIT     : constant := 16#00004000#;
    GL_DEPTH_BUFFER_BIT     : constant := 16#00000100#;
    GL_DEPTH_TEST           : constant := 16#0B71#;
+   GL_TEXTURE_1D           : constant := 16#0DE0#;
+   GL_TEXTURE_2D           : constant := 16#0DE1#;
+   GL_RED                  : constant := 16#1903#;
+   GL_GREEN                : constant := 16#1904#;
+   GL_BLUE                 : constant := 16#1905#;
 
+   GL_NEAREST              : constant := 16#2600#;
+   GL_LINEAR               : constant := 16#2601#;
+   GL_CLAMP                : constant := 16#2900#;
+   GL_REPEAT               : constant := 16#2901#;
 
+   GL_TEXTURE0             : constant := 16#84C0#;
+   GL_TEXTURE1             : constant := 16#84C1#;
+
+   GL_BLEND                : constant := 16#0BE2#;
+
+   GL_UNPACK_ALIGNMENT     : constant := 16#0CF5#;
+   GL_PACK_ALIGNMENT       : constant := 16#0D05#;
+   GL_TEXTURE_MAG_FILTER   : constant := 16#2800#;
+   GL_TEXTURE_MIN_FILTER   : constant := 16#2801#;
+   GL_TEXTURE_WRAP_S       : constant := 16#2802#;
+   GL_TEXTURE_WRAP_T       : constant := 16#2803#;
    procedure glViewport (x : GLint; y : GLint; width : GLsizei; height : GLsizei) with
      Import,
      Convention => StdCall,
@@ -103,6 +123,14 @@ package GL.C.Complete is
    glIsBuffer                : Accessories.glIsBuffer;
    glIsVertexArray           : Accessories.glIsVertexArray;
    glGetAttribLocation       : Accessories.glGetAttribLocation;
+
+   glPixelStorei   : Accessories.glPixelStorei;
+   glGenTextures   : Accessories.glGenTextures;
+   glBindTexture   : Accessories.glBindTexture;
+   glTexImage2D    : Accessories.glTexImage2D;
+   glTexParameteri : Accessories.glTexParameteri;
+   glIsTexture     : Accessories.glIsTexture;
+   glActiveTexture : Accessories.glActiveTexture;
 
    -- OpenGL Version 4.5
    glVertexArrayAttribBinding : Accessories.glVertexArrayAttribBinding;

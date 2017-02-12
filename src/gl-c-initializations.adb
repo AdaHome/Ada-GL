@@ -39,6 +39,14 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glDrawArrays);
    function Convert is new Unchecked_Conversion (Address, Accessories.glClear);
 
+   function Convert is new Unchecked_Conversion (Address, Accessories.glPixelStorei);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glGenTextures);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glBindTexture);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTexImage2D);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTexParameteri);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glIsTexture);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glActiveTexture);
+
 
    -- OpenGL Version 4.5
    function Convert is new Unchecked_Conversion (Address, Accessories.glVertexArrayAttribBinding);
@@ -83,8 +91,13 @@ package body GL.C.Initializations is
       glIsVertexArray           := Convert (Load ("glIsVertexArray"));
       glGetAttribLocation       := Convert (Load ("glGetAttribLocation"));
 
-
-
+      glPixelStorei   := Convert (Load ("glPixelStorei"));
+      glGenTextures   := Convert (Load ("glGenTextures"));
+      glBindTexture   := Convert (Load ("glBindTexture"));
+      glTexImage2D    := Convert (Load ("glTexImage2D"));
+      glTexParameteri := Convert (Load ("glTexParameteri"));
+      glIsTexture     := Convert (Load ("glIsTexture"));
+      glActiveTexture := Convert (Load ("glActiveTexture"));
       -- OpenGL Version 4.5
       glVertexArrayAttribBinding := Convert (Load ("glVertexArrayAttribBinding"));
       glVertexArrayAttribFormat  := Convert (Load ("glVertexArrayAttribFormat"));
