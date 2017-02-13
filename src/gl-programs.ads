@@ -30,6 +30,7 @@ package GL.Programs is
      Post => Check_No_Error;
 
    procedure Set_Current (Item : Program) with
+     Pre => Validate (Item),
      Post => Check_No_Error;
 
    procedure Attach (To : Program; Attachment : GLuint) with
