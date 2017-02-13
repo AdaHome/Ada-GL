@@ -18,7 +18,7 @@ package GL.Programs is
      Post => Check_No_Error;
 
    function Create_Empty return Program with
-     Post => Check_No_Error;
+     Post => Validate (Create_Empty'Result) and Check_No_Error;
 
    procedure Delete (Item : Program) with
      Post => Check_No_Error;

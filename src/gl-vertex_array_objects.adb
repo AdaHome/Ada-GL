@@ -5,7 +5,13 @@ use Ada.Text_IO;
 
 package body GL.Vertex_Array_Objects is
 
-
+   function Is_Vertex_Array_Object (Item : Vertex_Array_Object) return Boolean is
+      use type GL.C.GLboolean;
+      use GL.C.Complete;
+      use GL.C;
+   begin
+      return glIsVertexArray (GLuint (Item)) = GL_TRUE;
+   end;
 
    function Generate_Attribute return Vertex_Array_Object is
       use GL.C;

@@ -36,16 +36,27 @@ package GL.Textures is
    procedure Bind (Target : Texture_Target; Texture_Obj : Texture) with
      Post => Is_Texture (Texture_Obj) and Check_No_Error;
 
+   --glTextureStorage2D
    procedure Allocate (Texture_Object : Texture; Format : Internal_Pixel_Format; Width : Texels; Height : Texels) with
+     Pre => Is_Texture (Texture_Object),
      Post => Check_No_Error;
 
+   -- glTexStorage2D and glTextureStorage2D specify the storage requirements for
+   -- all levels of a two-dimensional texture or one-dimensional texture array simultaneously.
+   -- Once a texture is specified with this command,
+   -- the format and dimensions of all levels become immutable unless it is a proxy texture.
+   -- The contents of the image may still be modified, however, its storage requirements may not change.
+   -- Such a texture is referred to as an immutable-format texture.
+   -- Texturing maps a portion of a specified texture image onto each graphical primitive for which texturing is enabled.
    procedure Load (T : Texture; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address) with
+     Pre => Is_Texture (T),
      Post => Check_No_Error;
 
    procedure Load (Target : Texture_Target; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address) with
      Post => Check_No_Error;
 
    procedure Set_Parameter (T : Texture; Name : Symbolic_Name; Param : Symbolic_Param) with
+     Pre => Is_Texture (T),
      Post => Check_No_Error;
 
    procedure Set_Parameter (Target : Texture_Target; Name : Symbolic_Name; Param : Symbolic_Param) with

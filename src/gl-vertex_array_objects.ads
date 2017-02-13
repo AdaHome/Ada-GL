@@ -1,9 +1,11 @@
 with GL.C;
 with GL.C.Complete;
 with System;
+with GL.Errors;
 
 package GL.Vertex_Array_Objects is
 
+   use GL.Errors;
 
    type Vertex_Array_Object is new GL.C.GLuint;
 
@@ -16,6 +18,9 @@ package GL.Vertex_Array_Objects is
    type Component_Kind is (Byte_Type, Unsigned_Byte_Type, Short_Type, Unsigned_Short_Type, Float_Type, Fixed_Type);
 
    type Component_Count is new GL.C.GLint;
+
+   function Is_Vertex_Array_Object (Item : Vertex_Array_Object) return Boolean;
+
 
    --  glGenVertexArrays returns n vertex array object names in arrays.
    --  There is no guarantee that the names form a contiguous set of integers;
@@ -31,7 +36,8 @@ package GL.Vertex_Array_Objects is
    -- glCreateVertexArrays
    -- glCreateVertexArrays returns n previously unused vertex array object names in arrays,
    -- each representing a new vertex array object initialized to the default state.
-   function Create_Attribute return Vertex_Array_Object;
+   function Create_Attribute return Vertex_Array_Object with
+     Post => Is_Vertex_Array_Object (Create_Attribute'Result) and Check_No_Error;
 
 
 
@@ -41,7 +47,9 @@ package GL.Vertex_Array_Objects is
    -- If no vertex array object with name array exists, one is created when array is first bound.
    -- If the bind is successful no change is made to the state of the vertex array object,
    -- and any previous vertex array object binding is broken.
-   procedure Bind (Item : Vertex_Array_Object);
+   procedure Bind (Item : Vertex_Array_Object) with
+     Pre => Is_Vertex_Array_Object (Item),
+     Post => Check_No_Error;
 
 
 
@@ -59,7 +67,8 @@ package GL.Vertex_Array_Objects is
    -- glDisableVertexAttribArray and glDisableVertexArrayAttrib disable the generic vertex attribute array specified by index.
    -- glDisableVertexAttribArray uses currently bound vertex array object for the operation,
    -- whereas glDisableVertexArrayAttrib updates state of the vertex array object with ID vaobj.
-   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Attribute : Component_Attribute);
+   procedure Set_Attribute_Enable (Item : Vertex_Array_Object; Attribute : Component_Attribute) with
+     Pre => Is_Vertex_Array_Object (Item);
 
 
 
@@ -86,7 +95,8 @@ package GL.Vertex_Array_Objects is
    -- last three ones modify the state of a vertex array object with ID vaobj.
    -- attribindex specifies the index of the generic vertex attribute array whose data layout is being described,
    -- and must be less than the value of GL_MAX_VERTEX_ATTRIBS.
-   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural);
+   procedure Set_Attribute_Memory_Layout (VAO : Vertex_Array_Object; Attribute : Component_Attribute; Count : Component_Count; Kind : Component_Kind; Normalized : Boolean; Offset_Bytes : Natural) with
+     Pre => Is_Vertex_Array_Object (VAO);
 
 
 
