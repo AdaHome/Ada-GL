@@ -1,9 +1,14 @@
 with GL.C;
 with System;
+with GL.Errors;
 
 package GL.Uniforms is
 
+   pragma Assertion_Policy (Check);
+   --pragma Assertion_Policy (Ignore);
+
    use GL.C;
+   use GL.Errors;
 
    subtype Address is System.Address;
 
@@ -15,11 +20,15 @@ package GL.Uniforms is
    -- which should be a value returned by glGetUniformLocation.
    -- glUniform operates on the program object that was made part of current state by calling glUseProgram.
    -- glUniformMatrix4fv
-   procedure Modify_Matrix_4f (Item : Location; Data : Address);
-   procedure Modify_1f (Item : Location; Data : GLFloat);
+   procedure Modify_Matrix_4f (Item : Location; Data : Address) with
+     Post => Check_No_Error;
+
+   procedure Modify_1f (Item : Location; Data : GLFloat) with
+     Post => Check_No_Error;
 
    -- glGetUniformLocation
-   function Get (From : GLuint; Name : String) return Location;
+   function Get (From : GLuint; Name : String) return Location with
+     Post => Check_No_Error;
 
 
    function Identity (Item : Location) return GLint;

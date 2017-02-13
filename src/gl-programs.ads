@@ -1,26 +1,48 @@
 with GL.C;
 with GL.C.Complete;
+with GL.Errors;
 
 package GL.Programs is
 
    use GL.C;
    use GL.C.Complete;
+   use GL.Errors;
 
    type Program is private;
 
    type Program_Info is (Delete_Info, Compile_Info, Link_Info, Log_Length_Info);
 
    function Identity (Item : Program) return GLuint;
-   function Validate (Item : Program) return Boolean;
-   function Create_Empty return Program;
-   procedure Delete (Item : Program);
-   procedure Link (Item : Program);
-   procedure Link_Checked (Item : Program);
-   procedure Set_Current (Item : Program);
-   procedure Attach (To : Program; Attachment : GLuint);
-   procedure Get_Link_Log (Item : Program; Message : out String; Count : out Natural);
-   function Get_Link_Log (Item : Program; Count : Natural := 1024) return String;
-   function Link_Succeess (Item : Program) return Boolean;
+
+   function Validate (Item : Program) return Boolean with
+     Post => Check_No_Error;
+
+   function Create_Empty return Program with
+     Post => Check_No_Error;
+
+   procedure Delete (Item : Program) with
+     Post => Check_No_Error;
+
+   procedure Link (Item : Program) with
+     Post => Check_No_Error;
+
+   procedure Link_Checked (Item : Program) with
+     Post => Check_No_Error;
+
+   procedure Set_Current (Item : Program) with
+     Post => Check_No_Error;
+
+   procedure Attach (To : Program; Attachment : GLuint) with
+     Post => Check_No_Error;
+
+   procedure Get_Link_Log (Item : Program; Message : out String; Count : out Natural) with
+     Post => Check_No_Error;
+
+   function Get_Link_Log (Item : Program; Count : Natural := 1024) return String with
+     Post => Check_No_Error;
+
+   function Link_Succeess (Item : Program) return Boolean with
+     Post => Check_No_Error;
 
    Link_Error : exception;
 

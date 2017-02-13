@@ -1,7 +1,11 @@
+with GL.Errors;
+
 package GL.Programs.Shaders is
 
    use GL.C;
    use GL.C.Complete;
+   use GL.Errors;
+   use type GL.C.GLenum;
 
    type Shader_Stage is (Fragment_Stage, Vertex_Stage, Geometry_Stage, Tess_Evaluation_Stage, Tess_Control_Stage);
    type Shader_Info is (Stage_Info, Delete_Info, Compile_Info, Log_Length_Info, Source_Length_Info);
@@ -10,24 +14,45 @@ package GL.Programs.Shaders is
    type Shader is private;
 
    function Identity (Item : Shader) return GLuint;
-   function Create_Empty (Kind : Shader_Stage) return Shader;
-   procedure Delete (Item : Shader);
-   procedure Attach (To : Program; Attachment : Shader);
+
+   function Create_Empty (Kind : Shader_Stage) return Shader with
+     Post => Check_No_Error;
+
+   procedure Delete (Item : Shader) with
+     Post => Check_No_Error;
+
+   procedure Attach (To : Program; Attachment : Shader) with
+     Post => Check_No_Error;
    -- ShaderSource sets the source code in shader.
    -- Any source code previously stored in the shader object is completely replaced.
    -- OpenGL copies the shader source code strings when glShaderSource is called,
    -- so an application may free its copy of the source code strings immediately after the function returns.
-   procedure Set_Source (Item : Shader; Source : String);
+   procedure Set_Source (Item : Shader; Source : String) with
+     Post => Check_No_Error;
 
-   procedure Compile (Item : Shader);
-   procedure Compile_Checked (Item : Shader);
+   procedure Compile (Item : Shader) with
+     Post => Check_No_Error;
 
-   function Is_Shader (Item : Shader) return Boolean;
-   function Compile_Succeess (Item : Shader) return Boolean;
-   procedure Get_Compile_Log (Item : Shader; Message : out String; Count : out Natural);
-   function Get_Source_Length (Item : Shader) return Natural;
-   function Get_Compile_Log (Item : Shader; Count : Natural := 1024) return String;
-   function Get_Stage (Item : Shader) return Shader_Stage;
+   procedure Compile_Checked (Item : Shader) with
+     Post => Check_No_Error;
+
+   function Is_Shader (Item : Shader) return Boolean with
+     Post => Check_No_Error;
+
+   function Compile_Succeess (Item : Shader) return Boolean with
+     Post => Check_No_Error;
+
+   procedure Get_Compile_Log (Item : Shader; Message : out String; Count : out Natural) with
+     Post => Check_No_Error;
+
+   function Get_Source_Length (Item : Shader) return Natural with
+     Post => Check_No_Error;
+
+   function Get_Compile_Log (Item : Shader; Count : Natural := 1024) return String with
+     Post => Check_No_Error;
+
+   function Get_Stage (Item : Shader) return Shader_Stage with
+     Post => Check_No_Error;
 
    Compile_Error : exception;
 

@@ -3,6 +3,12 @@ with Ada.Text_IO;
 
 package body GL.Buffers is
 
+   function Is_Buffer (Item : Buffer) return Boolean is
+      use type GL.C.GLboolean;
+   begin
+      return glIsBuffer (GLuint (Item)) = GL_TRUE;
+   end Is_Buffer;
+
    procedure Generate_Buffer (Item : out Buffer_Array) is
    begin
       Item := (others => 0);

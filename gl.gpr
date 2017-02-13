@@ -21,4 +21,9 @@ library project GL is
 
   end Linker;
 
+   package Compiler is
+      --for Default_Switches ("ada") use ("-gnata", "-gnatwa", "-gnatf");
+      for Default_Switches ("ada") use ("-gnata");
+   end Compiler;
+  
 end GL;

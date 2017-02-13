@@ -3,6 +3,8 @@ with Ada.Assertions;
 
 package body GL.Textures is
 
+
+
    use Ada.Assertions;
 
    function Is_Texture (Texture_Obj : Texture) return Boolean is
@@ -61,7 +63,12 @@ package body GL.Textures is
       glTexParameteri (Target'Enum_Rep, Name'Enum_Rep, Param'Enum_Rep);
    end;
 
-   procedure Set_Pixel_Alignment (Bytes : GLint) is
+   procedure Set_Pack_Pixel_Alignment (Bytes : GLint) is
+   begin
+      glPixelStorei (GL_PACK_ALIGNMENT, Bytes);
+   end;
+
+   procedure Set_Unpack_Pixel_Alignment (Bytes : GLint) is
    begin
       glPixelStorei (GL_UNPACK_ALIGNMENT, Bytes);
    end;

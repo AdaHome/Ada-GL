@@ -4,6 +4,9 @@ with System;
 
 package GL.Buffers is
 
+   pragma Assertion_Policy (Check);
+   --pragma Assertion_Policy (Ignore);
+
    use GL.C;
    use GL.C.Complete;
    use System;
@@ -38,6 +41,8 @@ package GL.Buffers is
    type Buffer_Usage is (Static_Usage, Dynamic_Usage);
 
 
+   function Is_Buffer (Item : Buffer) return Boolean;
+
    -- glGenBuffers returns Item'Length buffer object names in buffers.
    -- There is no guarantee that the names form a contiguous set of integers;
    -- however, it is guaranteed that none of the returned names was in use
@@ -52,7 +57,8 @@ package GL.Buffers is
 
    -- glCreateBuffers returns n previously unused buffer names in buffers,
    -- each representing a new buffer object initialized as if it had been bound to an unspecified target.
-   function Create_Buffer return Buffer;
+   function Create_Buffer return Buffer with
+     Post => Is_Buffer (Create_Buffer'Result);
 
 
    -- glBindBuffer binds a buffer object to the specified buffer binding point.
@@ -60,7 +66,8 @@ package GL.Buffers is
    -- constants and buffer set to the name of a buffer object binds that buffer object name to the target.
    -- If no buffer object with name buffer exists, one is created with that name.
    -- When a buffer object is bound to a target, the previous binding for that target is automatically broken.
-   procedure Bind (To : Buffer_Slot; Item : Buffer);
+   procedure Bind (To : Buffer_Slot; Item : Buffer) with
+     Post => Is_Buffer (Item);
 
 
    procedure Create_New_Storage (B : Buffer; Size_Bytes : Natural; Data : Address; Usage : Buffer_Usage);

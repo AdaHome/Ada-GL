@@ -1,12 +1,18 @@
 with GL.C;
 with GL.C.Complete;
 with System;
+with GL.Errors;
 
 package GL.Textures is
 
+   pragma Assertion_Policy (Check);
+   --pragma Assertion_Policy (Ignore);
+
+   use GL.Errors;
    use GL.C;
    use GL.C.Complete;
    use System;
+   use type GL.C.GLenum;
 
    subtype Texels is GLsizei range 0 .. GLsizei'Last;
 
@@ -25,18 +31,33 @@ package GL.Textures is
    function Generate return Texture;
 
    function Create (Target : Texture_Target) return Texture with
-     Post => Is_Texture (Create'Result) and False;
+     Post => Is_Texture (Create'Result) and Check_No_Error;
 
    procedure Bind (Target : Texture_Target; Texture_Obj : Texture) with
-     Post => Is_Texture (Texture_Obj);
+     Post => Is_Texture (Texture_Obj) and Check_No_Error;
 
-   procedure Allocate (Texture_Object : Texture; Format : Internal_Pixel_Format; Width : Texels; Height : Texels);
-   procedure Load (T : Texture; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address);
-   procedure Load (Target : Texture_Target; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address);
+   procedure Allocate (Texture_Object : Texture; Format : Internal_Pixel_Format; Width : Texels; Height : Texels) with
+     Post => Check_No_Error;
 
-   procedure Set_Parameter (T : Texture; Name : Symbolic_Name; Param : Symbolic_Param);
-   procedure Set_Parameter (Target : Texture_Target; Name : Symbolic_Name; Param : Symbolic_Param);
-   procedure Set_Pixel_Alignment (Bytes : GLint);
+   procedure Load (T : Texture; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address) with
+     Post => Check_No_Error;
+
+   procedure Load (Target : Texture_Target; width : GLsizei; height : GLsizei; Format : Pixel_Format; Kind : Pixel_Type; Data : Address) with
+     Post => Check_No_Error;
+
+   procedure Set_Parameter (T : Texture; Name : Symbolic_Name; Param : Symbolic_Param) with
+     Post => Check_No_Error;
+
+   procedure Set_Parameter (Target : Texture_Target; Name : Symbolic_Name; Param : Symbolic_Param) with
+     Post => Check_No_Error;
+
+   procedure Set_Pack_Pixel_Alignment (Bytes : GLint) with
+     Pre => Bytes in 1 | 2 | 4 | 8,
+     Post => Check_No_Error;
+
+   procedure Set_Unpack_Pixel_Alignment (Bytes : GLint) with
+     Pre =>  Bytes in 1 | 2 | 4 | 8,
+     Post => Check_No_Error;
 
 private
 

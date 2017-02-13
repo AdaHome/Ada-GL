@@ -64,6 +64,7 @@ package GL.C.Complete is
    GL_RGBA2                : constant :=  16#8055#;
    GL_R8                   : constant :=  16#8229#;
    GL_R16                  : constant :=  16#822A#;
+   GL_NO_ERROR : constant := 16#0#;
 
    procedure glViewport (x : GLint; y : GLint; width : GLsizei; height : GLsizei) with
      Import,
