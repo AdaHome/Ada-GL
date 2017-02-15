@@ -24,6 +24,13 @@ package body GL.Uniforms is
       glUniform1f (GLint (Item), Data);
    end;
 
+   procedure Modify_1i (Item : Location; Data : GLint) is
+      use GL.C.Complete;
+      use GL.C;
+   begin
+      glUniform1i (GLint (Item), Data);
+   end;
+
    function Get (From : GLuint; Name : String) return Location is
       use GL.C.Complete;
       use Interfaces.C;

@@ -26,6 +26,9 @@ package GL.Uniforms is
    procedure Modify_1f (Item : Location; Data : GLFloat) with
      Post => Check_No_Error;
 
+   procedure Modify_1i (Item : Location; Data : GLint) with
+     Post => Check_No_Error;
+
    -- glGetUniformLocation
    function Get (From : GLuint; Name : String) return Location with
      Post => Check_No_Error;

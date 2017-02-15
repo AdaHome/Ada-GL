@@ -38,6 +38,7 @@ package GL.C.Complete is
    GL_DEPTH_TEST           : constant := 16#0B71#;
    GL_TEXTURE_1D           : constant := 16#0DE0#;
    GL_TEXTURE_2D           : constant := 16#0DE1#;
+   GL_TEXTURE_2D_ARRAY               : constant :=  16#8C1A#;
    GL_RED                  : constant := 16#1903#;
    GL_GREEN                : constant := 16#1904#;
    GL_BLUE                 : constant := 16#1905#;
@@ -47,6 +48,8 @@ package GL.C.Complete is
    GL_LINEAR               : constant := 16#2601#;
    GL_CLAMP                : constant := 16#2900#;
    GL_REPEAT               : constant := 16#2901#;
+
+   GL_CLAMP_TO_EDGE        : constant := 16#812F#;
 
    GL_TEXTURE0             : constant := 16#84C0#;
    GL_TEXTURE1             : constant := 16#84C1#;
@@ -60,11 +63,15 @@ package GL.C.Complete is
    GL_TEXTURE_WRAP_S       : constant := 16#2802#;
    GL_TEXTURE_WRAP_T       : constant := 16#2803#;
 
+   GL_SRC_ALPHA            : constant :=  16#0302#;
+   GL_ONE_MINUS_SRC_ALPHA  : constant :=  16#0303#;
 
    GL_RGBA2                : constant :=  16#8055#;
    GL_R8                   : constant :=  16#8229#;
    GL_R16                  : constant :=  16#822A#;
    GL_NO_ERROR : constant := 16#0#;
+
+
 
    procedure glViewport (x : GLint; y : GLint; width : GLsizei; height : GLsizei) with
      Import,
@@ -101,6 +108,10 @@ package GL.C.Complete is
      Convention => StdCall,
      External_Name => "glDisable";
 
+   procedure glBlendFunc (sfactor : GLenum; dfactor : GLenum) with
+     Import,
+     Convention => StdCall,
+     External_Name => "glBlendFunc";
 
    glCreateProgram           : Accessories.glCreateProgram;
    glDeleteProgram           : Accessories.glDeleteProgram;
@@ -116,6 +127,7 @@ package GL.C.Complete is
    glGetProgramInfoLog       : Accessories.glGetProgramInfoLog;
    glUniformMatrix4fv        : Accessories.glUniformMatrix4fv;
    glUniform1f               : Accessories.glUniform1f;
+   glUniform1i : Accessories.glUniform1i;
    glGetUniformLocation      : Accessories.glGetUniformLocation;
    glGenVertexArrays         : Accessories.glGenVertexArrays;
    glGenBuffers              : Accessories.glGenBuffers;
@@ -154,4 +166,7 @@ package GL.C.Complete is
    glTextureSubImage2D       : Accessories.glTextureSubImage2D;
    glCreateTextures          : Accessories.glCreateTextures;
    glTextureStorage2D        : Accessories.glTextureStorage2D;
+
+   glTextureSubImage3D    : Accessories.glTextureSubImage3D;
+   glTextureStorage3D    : Accessories.glTextureStorage3D;
 end;

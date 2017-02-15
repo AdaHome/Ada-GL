@@ -16,6 +16,7 @@ package GL.C.Accessories is
    type glGetShaderiv             is access procedure (shader : GLuint; pname : GLenum; params : access GLint);
    type glUniformMatrix4fv        is access procedure (location : GLint; count : GLsizei; transpose : GLboolean; value : Address) with Convention => StdCall;
    type glUniform1f               is access procedure (location : GLint; value : GLfloat) with Convention => StdCall;
+   type glUniform1i               is access procedure (location : GLint; value : GLint) with Convention => StdCall;
    type glGetUniformLocation      is access function (program : GLuint; name : GLstring) return GLint with Convention => StdCall;
    type glGetAttribLocation       is access function (program : GLuint; name : GLstring) return GLint with Convention => StdCall;
    type glGenVertexArrays         is access procedure (n : GLsizei; arrays : access GLuint) with Convention => StdCall;
@@ -53,8 +54,21 @@ package GL.C.Accessories is
    type glNamedBufferData is access procedure (buffer : GLuint; size : GLsizeiptr; data : Address; usage : GLenum) with Convention => StdCall;
    type glNamedBufferSubData is access procedure (buffer : GLuint; offset : GLintptr; size : GLsizei; data : Address) with Convention => StdCall;
 
-   type glTextureParameteri is access procedure (texture : GLuint; pname : GLenum; param : GLint) with Convention => StdCall;
-   type glTextureSubImage2D is access procedure (texture : GLuint; level: GLint; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; format : GLenum; kind : GLenum; data : Address) with Convention => StdCall;
-   type glTextureStorage2D  is access procedure (texture : GLuint; levels: GLint; internalformat : GLenum; width : GLsizei; height : GLsizei) with Convention => StdCall;
-   type glCreateTextures    is access procedure (target : GLenum; n : GLsizei; textures : access GLuint) with Convention => StdCall;
+   type glTextureParameteri is access procedure
+     (texture : GLuint; pname : GLenum; param : GLint) with Convention => StdCall;
+
+   type glTextureSubImage2D is access procedure
+     (texture : GLuint; level: GLint; xoffset : GLint; yoffset : GLint; width : GLsizei; height : GLsizei; format : GLenum; kind : GLenum; data : Address) with Convention => StdCall;
+
+   type glTextureSubImage3D is access procedure
+     (texture : GLuint; level: GLint; xoffset : GLint; yoffset : GLint; zoffset : GLint; width : GLsizei; height : GLsizei; depth : GLsizei; format : GLenum; kind : GLenum; data : Address) with Convention => StdCall;
+
+   type glTextureStorage2D  is access procedure
+     (texture : GLuint; levels: GLint; internalformat : GLenum; width : GLsizei; height : GLsizei) with Convention => StdCall;
+
+   type glTextureStorage3D  is access procedure
+     (texture : GLuint; levels: GLint; internalformat : GLenum; width : GLsizei; height : GLsizei; depth : GLsizei) with Convention => StdCall;
+
+   type glCreateTextures    is access procedure
+     (target : GLenum; n : GLsizei; textures : access GLuint) with Convention => StdCall;
 end;

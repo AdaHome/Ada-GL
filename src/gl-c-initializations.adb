@@ -21,6 +21,7 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glGetProgramiv);
    function Convert is new Unchecked_Conversion (Address, Accessories.glUniformMatrix4fv);
    function Convert is new Unchecked_Conversion (Address, Accessories.glUniform1f);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glUniform1i);
    function Convert is new Unchecked_Conversion (Address, Accessories.glGetUniformLocation);
    function Convert is new Unchecked_Conversion (Address, Accessories.glGenVertexArrays);
    function Convert is new Unchecked_Conversion (Address, Accessories.glGenBuffers);
@@ -61,6 +62,9 @@ package body GL.C.Initializations is
    function Convert is new Unchecked_Conversion (Address, Accessories.glTextureSubImage2D);
    function Convert is new Unchecked_Conversion (Address, Accessories.glCreateTextures);
    function Convert is new Unchecked_Conversion (Address, Accessories.glTextureStorage2D);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTextureSubImage3D);
+   function Convert is new Unchecked_Conversion (Address, Accessories.glTextureStorage3D);
+
 
 
    procedure Initialize (Load : Loader) is
@@ -80,6 +84,7 @@ package body GL.C.Initializations is
       glGetProgramiv            := Convert (Load ("glGetProgramiv"));
       glUniformMatrix4fv        := Convert (Load ("glUniformMatrix4fv"));
       glUniform1f               := Convert (Load ("glUniform1f"));
+      glUniform1i := Convert (Load ("glUniform1i"));
       glGetUniformLocation      := Convert (Load ("glGetUniformLocation"));
       glGenVertexArrays         := Convert (Load ("glGenVertexArrays"));
       glGenBuffers              := Convert (Load ("glGenBuffers"));
@@ -117,6 +122,10 @@ package body GL.C.Initializations is
       glTextureSubImage2D       := Convert (Load ("glTextureSubImage2D"));
       glTextureStorage2D        := Convert (Load ("glTextureStorage2D"));
       glCreateTextures          := Convert (Load ("glCreateTextures"));
+
+      glTextureSubImage3D    := Convert (Load ("glTextureSubImage3D"));
+      glTextureStorage3D    := Convert (Load ("glTextureStorage3D"));
+
    end;
 
 
